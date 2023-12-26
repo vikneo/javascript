@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/css/style.css">
+    <script src="./tst_lamp/light.js"></script>
     <title>Document</title>
 </head>
 <!--  class="flex menu-task" -->
@@ -34,13 +35,13 @@
     <br>
     <div class="flex swith-lamp">
         <button type="submit" onclick="light()">Вкл свет</button>
-        <script>
+        <!-- <script>
             function light (sw) {
                 var pic;
                 if (sw == 0) {
-                    pic = "pic_bulboff.gif"
+                    pic = "./tst_lamp/pic_bulboff.gif"
                 } else {
-                    pic = "pic_bulbon.gif"
+                    pic = "./tst_lamp/pic_bulbon.gif"
                 }
                 document.getElementById('myImage').src = pic;
             }
@@ -54,8 +55,8 @@
                 console.log(sw)
                 document.getElementById("myImage").src = pic;
             }
-            </script>
-        <img id="myImage" src="pic_bulboff.gif" width="60", height="100">
+            </script> -->
+        <img id="myImage" src="./tst_lamp/pic_bulboff.gif" width="60", height="100">
         <button type="submit" onclick="Off()">Выкл свет</button>
     </div>
 </body>
