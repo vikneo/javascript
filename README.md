@@ -1,3 +1,3 @@
 # Изучаем JavaScript
 
-### Сводный материал по [javaScript](#https://learn.javascript.ru/)
+### Сводный материал по [javaScript](https://learn.javascript.ru/ "Учебное пособие")
