@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="type_data.js"></script>
+    <title>Task 5</title>
+</head>
+<body>
+    <div class="task-width">
+        <h1>Типы данных</h1>
+        <div><a href="/we_teach_js/index.html">← Назад</a></div>
+        <h3>Объявим переменную "num" и присвоем число</h3>
+        <button type="submit" onclick="typeString()">Посмотреть результат</button>
+        <p>Переменная в JavaScript может содержать любые данные. В один момент там может быть строка, а в другой – число</p>
+        <hr>
+        <h3>Число</h3>
+        <p><b>"Infinity"</b> - представляет собой математическую бесконечность</p>
+        <p>Мы можем получить его в результате деления на ноль:</p>
+        <p>Например 2 / 0 =
+            <span id="result" class="task-5-color-answer"></span>
+        </p>
+        <button type="submit" onclick="deliveryZero()">Посмотреть</button>
+        <button type="submit" onclick="remove()">Стереть</button>
+        <hr>
+        <h3>BigInt</h3>
+        <p><a href="./teorya.html"> → Не много теории</a></p>
+        <p>Тип BigInt был добавлен в JavaScript, чтобы дать возможность работать с целыми числами произвольной длины.</p>
+        <p>Чтобы создать значение типа BigInt, необходимо добавить n в конец числового литерала:</p>
+        <div class="flex box-console">
+            <p>// символ "n" в конце означает, что это BigInt</p>
+            <p>const bigInt = 1234567890123456789012345678901234567890n;</p>
+        </div>
+        <hr>
+        <h3>Строка</h3>
+        <p>Строка (<b>string</b>) в JavaScript должна быть заключена в кавычки.</p>
+        <div class="flex box-console">
+            <p>let str = "Двойные ковычки";</p>
+            <p>let str2 = 'Одинарные кавычки тоже подойдут';</p>
+            <p>let phrase = `Обратные кавычки позволяют встраивать переменные: значение → ${str}`;</p>
+        </div>
+        <p id="primer_str"></p>
+        <button type="submit" onclick="primerString()">Посмотреть результат</button>
+        <button type="submit" onclick="remove()">Скрыть</button>
+        <hr>
+        <h3>Оператор typeof</h3>
+        <p>Оператор <b>typeof</b> возвращает тип аргумента. Это полезно, когда мы хотим обрабатывать
+            значения различных типов по-разному или просто хотим сделать проверку.</p>
+        <p>
+            У него есть две синтаксические формы:
+            <p><b>typeof 5</b> → 
+                <span id="check_1"></span>
+                <button type="submit" onclick="typeForm1()">Проверить</button>
+                <button type="submit" onclick="remove()">Скрыть</button>
+            </p>
+            <p><b>typeof(5)</b> →
+                <span id="check_2"></span>
+                <button type="submit" onclick="typeForm2()">Проверить</button>
+                <button type="submit" onclick="remove()">Скрыть</button>
+        </p>
+        <p>
+            <a href="./primer_typeof.html">→ Пример использования</a>
+        </p>
+        <hr>
+    </div>
+    <br>
+    <div><a href="/we_teach_js/index.html">← Назад</a></div>
+    <footer>
+
+    </footer>
+</body>
+</html>

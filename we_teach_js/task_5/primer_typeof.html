@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>Typeof</title>
+</head>
+<body>
+    <div class="block-typeof">
+        <h1>Пример использования <b>typeof</b></h1>
+        <div class="flex box-console">
+            <p>
+                typeof undefined // "undefined"
+            </p>
+            <p>
+                typeof 0 // "number"
+            </p>
+            <p>
+                typeof 10n // "bigint"
+            </p>
+            <p>
+                typeof true // "boolean"
+            </p>
+            <p>
+                typeof "foo" // "string"
+            </p>
+            <p>
+                typeof Symbol("id") // "symbol"
+            </p>
+            <p>
+                typeof Math // "object"  (1)
+            </p>
+            <p>
+                typeof null // "object"  (2)
+            </p>
+            <p>
+                typeof alert // "function"  (3)
+            </p>
+        </div>
+        <div>
+            <p>Последние три строки нуждаются в пояснении:</p>
+            <p><b>Math</b> — это встроенный объект, который предоставляет математические операции и константы. 
+                Мы рассмотрим его подробнее в главе Числа. Здесь он служит лишь примером объекта.</p>
+            <p>Результатом вызова typeof <b>null</b> является "object". Это официально признанная ошибка в <b>typeof</b>, 
+                ведущая начало с времён создания JavaScript и сохранённая для совместимости. 
+                Конечно, <b>null</b> не является объектом. Это специальное значение с отдельным типом.</p>
+            <p>Вызов <b>typeof alert</b> возвращает "function", потому что alert является функцией. 
+                Мы изучим функции в следующих главах, где заодно увидим, что в JavaScript нет специального типа «функция». 
+                Функции относятся к объектному типу. Но typeof обрабатывает их особым образом, возвращая "function". 
+                Так тоже повелось от создания JavaScript. Формально это неверно, но может быть удобным на практике.</p>
+            </p>
+        </div>
+        <br>
+        <div><a href="./index.html">← Назад</a></div>
+    </div>
+</body>
+</html>

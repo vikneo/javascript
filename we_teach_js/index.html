@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/style.css">
+    <title>Document</title>
+</head>
+<!--  class="flex menu-task" -->
+<body>
+    <h1>Учим JavaScript</h1>
+    <div class="flex nav-menu">
+        <table>
+            <tr>
+                <td>Урок первый </td><td><a href="task_1/index.html">"Привет Мир!"</a></td>
+            </tr>
+            <tr>
+                <td>Урок второй </td><td><a href="task_2/index.html">"Синтаксис"</a></td>
+            </tr>
+            <tr>
+                <td>Урок третий </td><td><a href="task_3/index.html">"Директива 'use strict';"</a></td>
+            </tr>
+            <tr>
+                <td>Урок четвертый </td><td><a href="task_4/index.html">"Переменные"</a></td>
+            </tr>
+            <tr>
+                <td>Урок пятый </td><td><a href="task_5/index.html">"Типы данных"</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <hr>
+    <br>
+    <div class="flex swith-lamp">
+        <button type="submit" onclick="light()">Вкл свет</button>
+        <script>
+            function light (sw) {
+                var pic;
+                if (sw == 0) {
+                    pic = "pic_bulboff.gif"
+                } else {
+                    pic = "pic_bulbon.gif"
+                }
+                document.getElementById('myImage').src = pic;
+            }
+            function Off (sw) {
+                var pic;
+                if (sw == 1) {
+                    pic = "pic_bulbon.gif"
+                } else {
+                    pic = "pic_bulboff.gif"
+                }
+                console.log(sw)
+                document.getElementById("myImage").src = pic;
+            }
+            </script>
+        <img id="myImage" src="pic_bulboff.gif" width="60", height="100">
+        <button type="submit" onclick="Off()">Выкл свет</button>
+    </div>
+</body>
+</html>
