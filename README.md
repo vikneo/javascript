@@ -1,1 +1,1 @@
-JavaScript
+# Изучаем JavaScript
