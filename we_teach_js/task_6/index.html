@@ -10,6 +10,37 @@
 <body>
     <div class="task-width">
         <h1>Взаимодействие: alert, prompt, confirm</h1>
+        <h3>Alert</h3>
+        <p>Она показывает сообщение и ждёт, пока пользователь нажмёт кнопку «ОК».</p>
+        <button type="submit" onclick="modWin()">alert</button>
+        <hr>
+        <br>
+        <h3>Promt</h3>
+        <p>Вызов <b>prompt</b> возвращает текст, указанный в поле для ввода, или null, если ввод отменён пользователем.</p>
+        <p>Важно!</p>
+        <p>Для IE: всегда устанавливайте значение по умолчанию <br>
+            Второй параметр является необязательным, но если не указать его, то Internet Explorer вставит строку <b>"undefined"</b> в поле для ввода.</p>
+        <div class="flex box-console">
+            <p>let test = prompt("Test", ''); // <-- для IE</p>
+        </div>
+        <p>Посмотреть результат:</p>
+        <button type="submit" onclick="promtWin()">promt</button>
+        <p id="promt"></p>
+        <hr>
+        <br>
+        <h3>Confirm</h3>
+        <p>Функция confirm отображает модальное окно с текстом вопроса question и двумя кнопками: OK и Отмена.</p>
+        <p>Посмотреть результат:</p>
+        <button type="submit" onclick="confirmWin()">confirm</button>
+        <hr>
+        <br>
+        <h3>Практика</h3>
+        <p>
+            Создайте страницу, которая спрашивает имя у пользователя и выводит его
+        </p>
+        <p>Решение</p>
+        <button type="submit" onclick="practica()">Открыть</button>
+        <hr>
     </div>
     <footer></footer>
 </body>

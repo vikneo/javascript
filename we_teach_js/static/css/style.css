@@ -82,3 +82,10 @@ p {
     background-color: rgb(208, 208, 240);
 
 }
+
+.task-6-promt {
+    margin: 0;
+    
+    color: green;
+    font-size: 20px;
+}
