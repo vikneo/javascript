@@ -17,7 +17,60 @@
         <div id="primer"></div>
         <hr>
         <br>
-        
+        <h3>Блок «else»</h3>
+        <p>Инструкция <b>if</b> может содержать необязательный блок <b>«else»</b> («иначе»). Он выполняется, когда условие ложно.</p>
+        <div class="flex box-console">
+            <p>let year = prompt('Какой сегодня год? ', "")</p>
+            <p>let data = new Date()</p>
+            <p>let full_year = data.getFullYear()</p>
+            <p>if (+year == full_year) {</p>
+            <p style="padding-left: 20px;">alert("И это правильный ответ!")</p>
+            <p>} <b>else</b> {</p>
+            <p style="padding-left: 20px;">alert("Советую еще подумать!")</p>
+            <p>}</p>
+        </div>
+        <br>
+        <button type="submit" onclick="blockElse()">Посмотреть</button>
+        <hr>
+        <br>
+        <h3>Несколько условий: «else if»</h3>
+        <p>Иногда нужно проверить несколько вариантов условия. Для этого используется блок <b>else if</b>.</p>
+        <div class="flex box-console">
+            <p>let year = prompt('В каком году была опубликована спецификация ECMAScript-2015?', '');</p>
+            <p>if (year < 2015) {</p>
+            <p style="padding-left: 20px;">alert( 'Это слишком рано...' );</p>
+            <p>} else if (year > 2015) {</p>
+            <p style="padding-left: 20px;">alert( 'Это поздновато' );</p>
+            <p>} else {</p>
+            <p style="padding-left: 20px;">alert( 'Верно!' );</p>
+            <p>}</p>
+        </div>
+        <p>В приведённом выше коде JavaScript сначала проверит <b>year < 2015</b>.</p>
+        <p>Если это неверно, он переходит к следующему условию <b>year > 2015.</b> Если оно тоже ложно, тогда сработает последний alert.</p>
+        <p>Блоков <b>else if</b> может быть и больше. Присутствие блока <b>else</b> не является обязательным.</p>
+        <br>
+        <button type="submit" onclick="blockElseIf()">Посмотреть</button>
+        <hr>
+        <br>
+        <h3>Условный оператор „?“</h3>
+        <p>Иногда нам нужно определить переменную в зависимости от условия.</p>
+        <p>Так называемый «условный» оператор <b>«вопросительный знак»</b> позволяет нам сделать это более коротким и простым способом.</p>
+        <p>Оператор представлен знаком вопроса <b>?</b>. Его также называют <b>«тернарный»</b>, так как этот оператор, единственный в своём роде, имеет три аргумента.</p>
+        <div class="flex box-console">
+            <p>Синтаксис:</p>
+            <p>let result = условие ? значение1 : значение2;</p>
+        </div>
+        <p></p>
+        <div class="flex box-console">
+            <p>Пример:</p>
+            <p>let accessAllowed = (age > 18) ? true : false;</p>
+        </div>
+        <br>
+        <button type="submit" onclick="ternaryOperaror()">Посмотрим на примере</button>
+        <div id="age"></div>
+        <hr>
+        <br>
+        <button type="submit" onclick="popupWindow('./tasks.html', 'Popup window', 600, 300)">Окно в центре</button>
     </div>
     <footer></footer>
 </body>
