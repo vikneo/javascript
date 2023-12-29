@@ -6,7 +6,7 @@ function result () {
         document.getElementById("primer").innerHTML = 
         `<p>let year = prompt('Какой сегодня год? ', "")</p><p>let data = new Date()</p>
         <p>let full_year = data.getFullYear()</p><p>if (+year == full_year) {</p><p style="padding-left: 20px;">'И это правильно!'</p><p>}
-        <button type="submit" onclick="remove()">Стереть</button>`
+        <button type="submit" onclick="remove('primer')">Стереть</button>`
         alert("И это правильный ответ!")
     }// else {
     //     alert("Советую еще подумать!")
