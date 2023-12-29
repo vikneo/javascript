@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>
-        Задачи для практики
+        Решение задач
     </h1>
     <div>
         <h3>if (строка с нулём)</h3>
@@ -24,7 +24,51 @@
         <div id="check_name"></div>
         <hr>
         <br>
-        
+        <h3>Покажите знак числа</h3>
+        <p>Используя конструкцию <b>if..else</b>, напишите код, который получает число через <b>prompt</b>, а затем выводит в <b>alert:</b></p>
+        <p>
+            <li>1, если значение больше нуля,</li>
+            <li>-1, если значение меньше нуля,</li>
+            <li>0, если значение равно нулю.</li>
+        </p>
+        <p>Предполагается, что пользователь вводит только числа.</p>
+        <button type="submit" onclick="sign()">Ответ</button>
+        <div id="sign_p"></div>
+        <hr>
+        <br>
+        <h3>Перепишите 'if' в '?'</h3>
+        <p>Перепишите конструкцию <b>if</b> с использованием условного оператора <b>'?'</b>:</p>
+        <div class="flex box-console">
+            <p>let result;</p>
+            <p></p>
+            <p>if (a + b < 4) {</p>
+            <p>result = 'Мало';</p>
+            <p>} else {</p>
+            <p>result = 'Много';</p>
+            <p>}</p>
+        </div>
+        <p><button type="submit" onclick="refactorif()">Смотреть</button></p>
+        <div id="refactoring"></div>
+        <hr>
+        <br>
+        <h3>Перепишите 'if..else' в '?'</h3>
+        <p>Перепишите <b>if..else</b> с использованием нескольких операторов <b>'?'</b>.</p>
+        <p>Для читаемости рекомендуется разбить код на несколько строк.</p>
+        <div class="flex box-console">
+            <p>let message;</p>
+            <p>if (login == 'Сотрудник') {</p>
+            <p>message = 'Привет';</p>
+            <p>} else if (login == 'Директор') {</p>
+            <p>message = 'Здравствуйте';</p>
+            <p>} else if (login == '') {</p>
+            <p>message = 'Нет логина';</p>
+            <p>} else {</p>
+            <p>message = '';</p>
+            <p>}</p>
+        </div>
+        <p><button type="submit" onclick="refactorIfElse()">Смотреть</button></p>
+        <div id="refactorifelse"></div>
+        <hr>
     </div>
 </body>
 </html>

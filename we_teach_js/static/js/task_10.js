@@ -49,8 +49,14 @@ function ternaryOperaror () {
 function remove (sw) {
     if (sw == 'primer') {
         document.getElementById('primer').innerHTML = "";
-    } else if (sw = 'check_name') {
+    } else if (sw == 'check_name') {
         document.getElementById('check_name').innerHTML = "";
+    } else if (sw == 'sign_p') {0
+        document.getElementById('sign_p').innerHTML = "";
+    } else if (sw == 'refactoring') {
+        document.getElementById('refactoring').innerHTML = "";
+    } else if (sw == 'refactorifelse') {
+        document.getElementById('refactorifelse').innerHTML = '';
     }
 }
 
@@ -81,10 +87,33 @@ function checkMe () {
 function checkNameJava () {
     let response = prompt("Какое «официальное» название JavaScript?", "")
     if (response == 'ECMAScript') {
-        document.getElementById('check_name').innerHTML = `<p style="color: green;">Верно!</p><button type="submit" onclick="remove()">Скрыть</button>`
+        document.getElementById('check_name').innerHTML = `<p style="color: green;">Верно!</p><button type="submit" onclick="remove('check_name')">Скрыть</button>`
     } else {
         document.getElementById('check_name').innerHTML = `<p style="color: red;">Не знаете? “ECMAScript”!</p><button type="submit" onclick="remove('check_name')">Скрыть</button>`
+    }tById('check_name').innerHTML = `<p style="color: red;">${answer}</p><button type="submit" onclick="remove('check_name')">Скрыть</button>`
+}
+
+function sign () {
+    let number = prompt("Введите число", "")
+    if (number > 0) {
+        alert(1);
+    } else if (number == 0) {
+        alert(0);
+        // document.getElementById('sign_p').innerHTML = `<p>0</p><button type="submit" onclick="remove('sign_p')">Очистить</button>`
+    } else {
+        alert(-1);
     }
-    // let answer = (response === 'ECMAScript') ? 'Верно!': 'Не знаете? “ECMAScript”!'
-    // document.getElementById('check_name').innerHTML = `<p style="color: red;">${answer}</p><button type="submit" onclick="remove('check_name')">Скрыть</button>`
+}
+
+function refactorIf () {
+    document.getElementById('refactoring').innerHTML = `<div class="flex box-console"><p>let result = (a + b < 4) ? 'Мало' : 'Много';</p></div>
+    <p><button type="submit" onclick="remove('refactoring')">Очистить</button></p>`
+}
+
+function refactorIfElse () {
+    document.getElementById('refactorifelse').innerHTML = `<div class="flex box-console">
+    <p>let result = (login == "Сотрудник") ? 'Привет' :</p>
+    <p>(login == "Директор") ? 'Здравствуйте' :</p>
+    <p>(login == "") ? 'Нет логина : '';</p></div>
+    <p><button type="submit" onclick="remove('refactorifelse')">Очистить</button></p>`
 }
