@@ -46,8 +46,12 @@ function ternaryOperaror () {
     alert(`Значение переменной 'accessAllowed' - ${accessAllowed}`)
 }
 
-function remove (){
-    document.getElementById('primer').innerHTML = ""
+function remove (sw) {
+    if (sw == 'primer') {
+        document.getElementById('primer').innerHTML = "";
+    } else if (sw = 'check_name') {
+        document.getElementById('check_name').innerHTML = "";
+    }
 }
 
 function popupWindow (url, title, width, height) {
@@ -58,10 +62,29 @@ function popupWindow (url, title, width, height) {
     let top = pos_top + (window.innerHeight / 2) - (height / 2);
     console.log(`left - ${left}; top - ${top}`)
     
-    return window.open(url, title, 'toolbar=no, location=no, directories=no, status=yes, menubar=no,scrollbars=yes, resizable=no, copyhistory=no, width=' + width + ', height=' + height + ', top=' + top + ', left=' + left);
+    return window.open(url, title, 'toolbar=no, location=no, directories=no, status=yes, menubar=no,scrollbars=yes, resizable=yes, copyhistory=no, width=500, height=600, top=' + top + ', left=' + left);
 }
 // function popupWindow(url, title, w, h) {
 //     var left = (screen.width/2)-(w/2);
 //     var top = (screen.height/2)-(h/2);
 //     return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
-//   } 
+//   }
+
+// Решение для задач
+
+function checkMe () {
+    let response = confirm('Выведется ли alert?\n if ("0") alert("Привет");', '')
+    let answer = response ? 'Правильно, выведется': 'Не верно (строка "0" – не пустая).'
+    alert(answer)
+}
+
+function checkNameJava () {
+    let response = prompt("Какое «официальное» название JavaScript?", "")
+    if (response == 'ECMAScript') {
+        document.getElementById('check_name').innerHTML = `<p style="color: green;">Верно!</p><button type="submit" onclick="remove()">Скрыть</button>`
+    } else {
+        document.getElementById('check_name').innerHTML = `<p style="color: red;">Не знаете? “ECMAScript”!</p><button type="submit" onclick="remove('check_name')">Скрыть</button>`
+    }
+    // let answer = (response === 'ECMAScript') ? 'Верно!': 'Не знаете? “ECMAScript”!'
+    // document.getElementById('check_name').innerHTML = `<p style="color: red;">${answer}</p><button type="submit" onclick="remove('check_name')">Скрыть</button>`
+}
