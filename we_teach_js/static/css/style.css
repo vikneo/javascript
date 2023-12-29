@@ -10,6 +10,14 @@ a {
     text-decoration: none;
 }
 
+th {
+    padding-bottom: 35px;
+}
+
+td {
+    padding-left: 25px;
+}
+
 h1 {
     text-align: center;
 }
@@ -30,7 +38,7 @@ p {
 .nav-menu {
     margin-left: 50px;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 900px;
 }
 
 .swith-lamp {
