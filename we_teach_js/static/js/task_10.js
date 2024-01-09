@@ -8,9 +8,9 @@ function result () {
         <p>let full_year = data.getFullYear()</p><p>if (+year == full_year) {</p><p style="padding-left: 20px;">'И это правильно!'</p><p>}
         <button type="submit" onclick="remove('primer')">Стереть</button>`
         alert("И это правильный ответ!")
-    }// else {
-    //     alert("Советую еще подумать!")
-    // }
+    } else {
+     alert("Советую еще подумать!")
+    }
 }
 
 function blockElse () {
@@ -90,7 +90,7 @@ function checkNameJava () {
         document.getElementById('check_name').innerHTML = `<p style="color: green;">Верно!</p><button type="submit" onclick="remove('check_name')">Скрыть</button>`
     } else {
         document.getElementById('check_name').innerHTML = `<p style="color: red;">Не знаете? “ECMAScript”!</p><button type="submit" onclick="remove('check_name')">Скрыть</button>`
-    }tById('check_name').innerHTML = `<p style="color: red;">${answer}</p><button type="submit" onclick="remove('check_name')">Скрыть</button>`
+    }tById('check_name').innerHTML = `<p style="color: red;">${answer}</p><button type="submit" onclick="remove('check_name')">Очистить</button>`
 }
 
 function sign () {
