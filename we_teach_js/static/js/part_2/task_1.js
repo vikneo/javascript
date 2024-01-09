@@ -19,3 +19,8 @@ function winFunc () {
 function widowWidth () {
     alert(`Ширина окна браузера ${window.innerWidth}px\nВысота окна браузера     ${window.innerHeight}px`);
 }
+
+function updatedColor () {
+    document.body.style.background = "aqua"; // устанавливаем цвет окна (body) в "aqua"
+    setTimeout(() => document.body.style.background = "", 1000); // Через 1000 мс цвет окна удаляется
+}
