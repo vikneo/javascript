@@ -1,3 +1,13 @@
+@font-face {
+	font-family: 'FontName bold'; 
+	src: url('../fonts/Florida Vibes by Turbologo.otf'); 
+}
+
+@font-face {
+    font-family: 'Super italic';
+    src: url('../fonts/upperpunchsuperital.ttf');
+}
+
 body {
     margin-left: 50px;
 }
@@ -29,6 +39,15 @@ img {
 
 p {
     margin: 8px;
+}
+
+button {
+    border-radius: 5px;
+}
+
+.button-color {
+    border-radius: 5px;
+    background-color: aquamarine;
 }
 
 .flex {
@@ -96,4 +115,12 @@ p {
     
     color: green;
     font-size: 20px;
+}
+
+.size-of-hidden {
+    padding: 20px 40px;
+    border-radius: 8px;
+    background-color: #dfd2be;
+    /* font-family: 'Super italic'; */
+    font-size: 18px;
 }
