@@ -24,3 +24,10 @@ function updatedColor () {
     document.body.style.background = "aqua"; // устанавливаем цвет окна (body) в "aqua"
     setTimeout(() => document.body.style.background = "", 1000); // Через 1000 мс цвет окна удаляется
 }
+
+function renderPage () {
+    alert(`Текущий URL - ${location.href}`);
+    if (confirm("Хотите перейти на сайт игры Perfect World?")) {
+        location.href = "https://pwonline.ru/news.php";
+    }
+}
