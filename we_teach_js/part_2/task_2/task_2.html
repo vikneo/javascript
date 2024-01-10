@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/we_teach_js/static/css/style.css">
+    <link rel="stylesheet" href="/we_teach_js/static/js/part_2/task_2.js">
+    <title>DOM-дерево</title>
+</head>
+<body>
+    <h1>DOM-дерево</h1>
+    <a href="../../index.html">← Назад</a>
+    <div>
+        <h2>Навигация по DOM-элементам</h2>
+        <div class="task-width">
+            <p>Так выглядят основные ссылки, по которым можно переходить между узлами DOM:</p>
+            <p class="nodes-dom"></p>
+            <h3>Сверху: documentElement и body</h3>
+            <ul>
+                <li class="li-text">
+                    Самые верхние элементы дерева доступны как свойства объекта <span class="select-text-span">document</span>:
+                    <p><span class="select-text-span"><b>&lt;html&gt; = document.documentElement</b></span></p>
+                </li>
+                <li class="li-text">
+                    Самый верхний узел документа: <span  class="select-text-span">document.documentElement.</span>
+                    В DOM он соответствует тегу <span  class="select-text-span">&lt;html&gt;</span>.
+                    <p><span class="select-text-span"><b>&lt;body&gt; = document.body</b></span></p>
+                </li>
+                <li class="li-text">
+                    Другой часто используемый DOM-узел – узел тега <span class="select-text-span">&lt;body&gt;: document.body</span>.
+                    <p><span class="select-text-span">&lt;head&gt; = document.head</span></p>
+                </li>
+            </ul>
+            <hr>
+            <br>
+            <h3>Дети: childNodes, firstChild, lastChild</h3>
+            Вывести алерт и всплывающее окно 
+            <hr>
+            <br>
+            <h3>DOM-коллекции</h3>
+        </div>
+    </div>
+</body>
+</html>

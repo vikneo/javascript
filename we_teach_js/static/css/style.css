@@ -125,3 +125,21 @@ button {
     /* font-family: 'Super italic'; */
     font-size: 18px;
 }
+
+.nodes-dom {
+    width: 500px;
+    height: 430px;
+    background-image: url('../img/DOM_дерево.PNG');
+    background-repeat: no-repeat;
+}
+
+.li-text {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.select-text-span {
+    padding: 3px;
+    color: darkblue;
+    background-color: rgb(210 210 227);
+}
