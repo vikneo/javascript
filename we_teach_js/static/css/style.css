@@ -10,6 +10,8 @@
 
 body {
     margin-left: 50px;
+    background: #232529;
+    color: azure;
 }
 
 footer {
@@ -17,6 +19,7 @@ footer {
 }
 
 a {
+    color: #3bd1d1;
     text-decoration: none;
 }
 
@@ -46,6 +49,17 @@ button {
     border-radius: 5px;
 }
 
+.button-pos-right {
+    direction: rtl;
+}
+
+.button-treangle {
+    width: 36px;
+    background: #203030;
+    color: #87bfbf;
+    font-size: 18px;
+}
+
 .button-color {
     border-radius: 5px;
     background-color: aquamarine;
@@ -53,6 +67,10 @@ button {
 
 .flex {
     display: flex;
+}
+
+.indent {
+    padding-left: 25px;
 }
 
 .nav-menu {
@@ -107,7 +125,7 @@ button {
 .box-console {
     padding: 15px;
     flex-direction: column;
-    background-color: rgb(208, 208, 240);
+    background-color: rgb(48 48 66);
 
 }
 
@@ -126,10 +144,18 @@ button {
     font-size: 18px;
 }
 
-.nodes-dom {
+.image-size {
     width: 500px;
     height: 430px;
+}
+
+.nodes-dom {
     background-image: url('../img/DOM_дерево.PNG');
+    background-repeat: no-repeat;
+}
+
+.nav-to-element {
+    background-image: url('../img/Children.PNG');
     background-repeat: no-repeat;
 }
 
@@ -139,7 +165,12 @@ button {
 }
 
 .select-text-span {
-    padding: 3px;
-    color: darkblue;
-    background-color: rgb(210 210 227);
+    padding: 5px;
+    color: #b0b0c7;
+    background-color: #2e313c;
+}
+
+.primery {
+    padding-left: 35px;
+    flex-direction: row;
 }
