@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,24 +9,41 @@
 
     <title>Всплытие и погружение</title>
 </head>
+
 <body>
     <h1>Всплытие и погружение</h1>
     <h2>Объект "Event"</h2>
     <div class="wrapper">
         <p>Вешаем обработчик событий на кнопки "Click 1 -:- Click 6"</p>
         <p>Вывод текстовое содержимое каждой кнопки <b>в консоли (F12)</b></p>
-        
-        <button data-num="1" class="btn" onclick="buttonEvent()">Click 1</button>
-        <button data-num="2" class="btn" onclick="buttonEvent()">Click 2</button>
-        <button data-num="3" class="btn" onclick="buttonEvent()">Click 3</button>
+
+        <button data-num="1" class="btn" onclick="Target()">target === currentTarget</button>
+        <button data-num="2" class="btn" onclick="notTarget()"><strong>target != currentTarget</strong></button>
+        <button data-num="3" class="btn" onclick="windowClick()">window click</button>
         <button data-num="4" class="btn" onclick="buttonEvent()">Click 4</button>
         <button data-num="5" class="btn" onclick="buttonEvent()">Click 5</button>
         <button data-num="6" class="btn" onclick="buttonEvent()">Click 6</button>
     </div>
     <div>
-        <h2>Схема</h2>
+        <h2>Схема фазы жизненного цикла события</h2>
+        <img src="./static/img/жизненый цикл собтия.png" width="500px" alt="">
     </div>
-    <p></p>
     <a href="./index.html">◄ Назад</a>
+
+
+    <script>
+        let img = document.querySelector('img');
+        img.addEventListener('mouseover', function(event) {
+            console.log("currentTarget > ", event.currentTarget)
+            console.log("this > ", this)
+        })
+        // Если спользовать стрелочную функцию, то свойство "this" теряется и 
+        // остается "currentTarget" с которым можно продолжать работать
+        img.addEventListener('mouseover', (event) => {
+            console.log("currentTarget > ", event.currentTarget)
+            console.log("this > ", this)
+        })
+    </script>
 </body>
+
 </html>
