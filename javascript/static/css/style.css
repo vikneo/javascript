@@ -2,3 +2,25 @@ a {
     color: rgb(197, 16, 16);
     text-decoration: none;
 }
+
+.autos {
+    display: flex;
+}
+
+.autoCard {
+    max-width: 145px;
+    max-height: 100%;
+    padding: 20px;
+    margin-right: 20px;
+    outline: 1px solid red;
+}
+
+.autoCard:last-child {
+    margin-right: 0;
+}
+
+.btn {
+    padding: 8px 20px;
+    background: black;
+    color: aliceblue;
+}
