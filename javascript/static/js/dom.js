@@ -103,8 +103,7 @@ const btnHTML = `<button type='button' class='btn'>Удалить</button>`
 // Поместить кнопку с классом btn внутрь элемента с классом autoCard
 const divAutoCards = document.querySelectorAll('.autoCard');
 divAutoCards.forEach(btnDel => {
-    // btnDel.insertAdjacentHTML('beforeend', btnHTML);
-    console.log(btnDel)
+    btnDel.insertAdjacentHTML('beforeend', btnHTML);
 })
 
 // При клике на кнопку - удалять карточку из структуры DOM
