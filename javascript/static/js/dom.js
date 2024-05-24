@@ -67,10 +67,10 @@ const generateAutoCard = (brand, color, year) => {
         <h2>${brand.toUpperCase()} ${year}</h2>
         <p>Автомобиль ${brand} - ${year} года. Возраст авто - ${cueYear - year} лет.</p>
         <p>Цвет: ${color}</p>
-        <button type='button' class='btn'>Удалить</button>
     </div>
-    `;
+        `;
 }
+
 // Функция должна возвращать разметку HTML:
 // <div class="autoCard">
 // <h2>${brand} ${year}</h2>
@@ -93,16 +93,19 @@ const carsHTML = carsList.map(car => {
 
 // Поместить эти 3 карточки внутрь DIV с классом autos
 carsDiv.innerHTML = carsHTML;
+console.log(carsDiv)
 // Поместить DIV с классом autos на страницу DOM -до DIV с классом wrapper
 div.insertAdjacentElement('beforebegin', carsDiv);
-// Добавить кнопку Удалить на каждую карточку авто
-const button = document.createElement('button');
-// Добавить к кнопке скласс btn
-button.classList.add('btn');
-button.innerText = 'Удалить';
-// Поместить кнопку с классом btn внутрь элемента с классом autoCard
-// const divAutoCards = document.querySelectorAll('.autoCard');
 
+// Добавить кнопку Удалить на каждую карточку авто
+// Добавить к кнопке скласс btn
+const btnHTML = `<button type='button' class='btn'>Удалить</button>`
+// Поместить кнопку с классом btn внутрь элемента с классом autoCard
+const divAutoCards = document.querySelectorAll('.autoCard');
+divAutoCards.forEach(btnDel => {
+    // btnDel.insertAdjacentHTML('beforeend', btnHTML);
+    console.log(btnDel)
+})
 
 // При клике на кнопку - удалять карточку из структуры DOM
 // 1. Выбрать все кнопки
