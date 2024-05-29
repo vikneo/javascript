@@ -3,6 +3,11 @@ h1.innerText = 'Local Storage - Как правильно использоват
 const div = document.querySelector('.wrapper');
 div.insertAdjacentElement('beforebegin', h1)
 
+// Local storage представляет хранилище для данных на постоянной основе. 
+// Данные из local storage автоматически не удаляются и не имеют срока действия.
+// Эти данные не передаются на сервер в запросе HTTP.
+// Кроме того, объем local storage составляет в 
+// Chrome и Firefox 5 Mб для домена, а в IE - 10 Mб.
 
 // Создаем пицу
 
