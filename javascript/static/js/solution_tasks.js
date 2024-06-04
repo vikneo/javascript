@@ -60,3 +60,28 @@ const groupStudents = (list) => {
 }
 
 console.log(groupStudents(students))
+
+// ================ TASK 4 =========================
+// 4. Написать функцию, которая принимает два аргумента:
+// массив из уникальных целыъ чисел и сумму в виде целого числа.
+// Если сумма двух любых чисел массива из аргумета равна числу, которое
+// приходит вторым аргументом, функция должна вернуть новый массив
+// из этих двух чисел в любом порядке.
+// Если рещения нет, вернуть пустой массив.
+
+const myNumbers = [3, 5, -4, 8, 11, 1, -1, 6, 4]
+const sum = 10;
+
+const countSum = (list, target) => {
+    const count = [];
+    for (let i = 0; i < list.length; i++) {
+        for (let j = i + 1; j < list.length; j++) {
+            if (list[i] + list[j] === target) {
+                count.push([list[i], list[j]]);
+            };
+        };
+    };
+    return count;
+}
+
+console.log(countSum(myNumbers, sum));
