@@ -62,6 +62,7 @@ const groupStudents = (list) => {
 console.log(groupStudents(students))
 
 // ================ TASK 4 =========================
+
 // 4. Написать функцию, которая принимает два аргумента:
 // массив из уникальных целыъ чисел и сумму в виде целого числа.
 // Если сумма двух любых чисел массива из аргумета равна числу, которое
@@ -85,3 +86,20 @@ const countSum = (list, target) => {
 }
 
 console.log(countSum(myNumbers, sum));
+
+// ================ TASK 5 =========================
+
+// 5. Получить единый массив из любимых пицц каждого друга
+
+const friends = [
+    {name: 'Alex', pizzas: ['cheese', 'pepperoni']},
+    {name: 'Mike', pizzas: ['salami', 'margarita']},
+    {name: 'Stas', pizzas: ['meat']},
+    {name: 'Anna', pizzas: ['fish']},
+]
+
+const pizzas = friends.reduce((accum, current) => {
+    return [...accum, ...current.pizzas];
+}, []);
+
+console.log(pizzas)
