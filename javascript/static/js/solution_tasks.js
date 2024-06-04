@@ -103,3 +103,26 @@ const pizzas = friends.reduce((accum, current) => {
 }, []);
 
 console.log(pizzas)
+
+// ================ TASK 6 =========================
+// 6. Записать строку (символы строки) в обратном порядке (2 способа)
+
+const myStr = 'mypizzas';
+console.log(`Оригинальная строка: ${myStr}`);
+
+const revertStr = (str) => {
+    const reversed = [];
+    for (let i = str.length - 1; i >= 0; i--) {
+        reversed.push(str[i])
+    };
+    return reversed.join('');
+}
+
+console.log(`Способ 1-й: ${revertStr(myStr)}`);
+
+const revertStr2 = (str) => {
+    reversed = str.split('');
+    return reversed.reverse().join('');
+}
+
+console.log(`Способ 2-й: ${revertStr2(myStr)}`);
