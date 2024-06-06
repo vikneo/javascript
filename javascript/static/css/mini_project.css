@@ -1,0 +1,64 @@
+html {
+    --pink-bg: #9b59b6;
+    --pink-tab: #8e44ad;
+    --pink_tab-active: #612e76;
+    font-size: 62.5%;
+    font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 2em;
+    line-height: 1.5;
+    background: var(--pink-bg);
+}
+
+h1 {
+    font-size: 82px;
+    margin: 0 0 42px;
+    font-family: Poppins;
+    font-weight: 900;
+    color: #fff;
+}
+
+.wrappers {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: var(--pink-bg);
+}
+
+.tabs {
+    display: grid;
+}
+
+[role="tablist"] {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 10px;
+}
+
+[role="tabpanel"] {
+    background: var(--pink_tab-active);
+    padding: 2rem;
+    color: white;
+}
+
+button {
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 3rem;
+    background: var(--pink-tab);
+    border: 0;
+    color: white;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+}
+
+button[aria-selected="true"] {
+    background: var(--pink_tab-active);
+}
+
+button:focus {
+    outline: 0;
+}
