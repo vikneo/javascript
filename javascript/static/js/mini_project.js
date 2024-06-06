@@ -22,6 +22,8 @@ function handleClick(e) {
     // console.log('id >>>', id);
     // console.log('tabPanel >>>', tabPanels);
     const tabPanel = tabPanels.find(panel => {
+        // find - это аттрибут массива Array, но не NodeList
+        // По этому обернуть tabPanels в Array.from()
         if (panel.getAttribute('aria-labelledby') === id) {
             return true;
         }
