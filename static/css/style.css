@@ -1,0 +1,48 @@
+.title {
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.bread-crumbs > ol {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+    list-style: none;
+}
+.bread-crumbs > ol > li > a {
+    text-decoration: none;
+}
+.arrow-right {
+    padding: 0 5px;
+}
+.flex {
+    display: flex;
+}
+.container,
+.title {
+    max-width: 800px;
+    margin: 30px auto;
+}
+.candle-block {
+    align-items: center;
+}
+.candle-img {
+    width: 80px;
+}
+.candle-link {
+    padding: 0 10px;
+    font-size: 35px;
+    text-decoration: none;
+    color: blue;
+}
+.candle-link:hover {
+    border-radius: 8px;
+    color: aqua;
+    background-color: rgb(129, 114, 91);
+}
+.candle-desc-block {
+    flex-direction: column;
+
+}
+.text-description {
+    padding: 5px 10px;
+}
