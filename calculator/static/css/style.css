@@ -1,0 +1,60 @@
+.block-h1 {
+    margin: 0 auto;
+    padding: 20px 30px;
+    color: #8b6b4a;
+}
+.hidden {
+    display: block;
+}
+.description {
+    color: black;
+    margin-bottom: 30px;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+.align-items {
+    align-items: center;
+}
+.candle {
+    gap: 10px;
+    font-size: 20px;
+}
+.candle > input {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.add {
+    margin-right: 25px;
+    margin-bottom: 0 !important;
+    background-color: #1c8b79;
+    color: aliceblue;
+    border-radius: 5px;
+}
+.add:hover {
+    background-color: #8b6b4a;
+}
+.add:active {
+    background-color: red;
+}
+.btn {
+    margin: 35px;
+    padding: 5px 8px;
+    width: 40%;
+    background-color: bisque;
+    border-top-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+.btn:hover {
+    background-color: #0fad93;
+    color: aliceblue;
+    font-weight: bold;
+}
+.calculate {
+    align-items: center;
+    justify-content: start;
+}
+.bg-img {
+    width: 50px;
+}
