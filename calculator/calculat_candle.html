@@ -23,24 +23,26 @@
             </p>
             <div class="hidden">
                 <form action="">
-                    <div class="flex candle">
-                        <label for="candle-1">№1</label>
-                        <input class="input" type="text" name="candle-1">
+                    <div class="block-candles">
+                        <div class="flex candle">
+                            <label class="num-candle" for="candle-1">№1</label>
+                            <input class="input" type="text" name="candle-1">
+                        </div>
+                        <div class="flex candle">
+                            <label class="num-candle" for="candle-2">№2</label>
+                            <input class="input" type="text" name="candle-2">
+                        </div>
+                        <div class="flex candle">
+                            <label class="num-candle" for="candle-3">№3</label>
+                            <input class="input" type="text" name="candle-3">
+                        </div>
+                        <div class="flex candle">
+                            <label class="num-candle" for="candle-4">№4</label>
+                            <input class="input" type="text" name="candle-4">
+                        </div>
                     </div>
-                    <div class="flex candle">
-                        <label for="candle-2">№2</label>
-                        <input class="input" type="text" name="candle-2">
-                    </div>
-                    <div class="flex candle">
-                        <label for="candle-3">№3</label>
-                        <input class="input" type="text" name="candle-3">
-                    </div>
-                    <div class="flex candle">
-                        <label for="candle-4">№4</label>
-                        <input class="input" type="text" name="candle-4">
-                    </div>
-                    <div class="flex candle">
-                        <input class="add" name="add" type="button" value="+" title="Добавить еще свечу">
+                    <div class="flex add-candle">
+                        <input class="add" id="addCandle" name="add" type="button" value="+" title="Добавить еще свечу">
                         <label for="add">Добавить свечу</label>
                     </div>
                     <div class="flex calculate">
@@ -53,7 +55,7 @@
                 <div class=""></div>
             </div>
         </div>
-
     </div>
+    <script src="static/js/main.js"></script>
 </body>
 </html>
