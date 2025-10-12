@@ -10,6 +10,13 @@
 }
 .bread-crumbs > ol > li > a {
     text-decoration: none;
+    color: rgb(5, 158, 94);
+}
+.bread-crumbs > ol > li > a:hover {
+    color: rgb(212, 25, 103);
+}
+.bread-crumbs > ol > li {
+    color: rgba(88, 77, 75, 0.603);
 }
 .arrow-right {
     padding: 0 5px;
