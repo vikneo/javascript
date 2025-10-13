@@ -14,13 +14,20 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
+summary > ol > li {
+    font-size: 13px !important;
+}
+.details {
+    display: grid;
+}
 .align-items {
     align-items: center;
 }
 .candle,
-.cord {
-    gap: 10px;
-    font-size: 20px;
+.cord,
+.details {
+    gap: 15px;
+    font-size: 18px;
 }
 .candle > input,
 .cord > input {
