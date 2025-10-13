@@ -69,3 +69,14 @@ let reset_form = document.querySelector(".reset").addEventListener('click', func
     console.log(form_reset)
     formCandle.reset()
 })
+
+function Prompt() {
+    let errorRate = +prompt(`
+    Введите погрешность для расчета в MOm.\n
+    При расчетах для подбора комплекта
+    будет учитваться погрешность в диапазоне
+    от 0 до <вводимого значения>.`)
+    if(errorRate) {
+        alert(`Вы ввели ${errorRate}`)
+    }
+}
