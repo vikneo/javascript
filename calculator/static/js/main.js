@@ -36,13 +36,14 @@ let click = document.querySelector("#addCandle").addEventListener('click', funct
     let columns = document.querySelectorAll(".candle")
     for (let i = columns.length - 1; i > 0; i-- ) {
         if (i === columns.length - 1) {
-            // alert(columns[i])
-            _form.innerHTML += `
-            <div class="flex candle">
-            <input class="input" type="text" name="candle-${i + 2}" placeholder="Свеча ${i + 2}">
-            </div>
-            `
-            // <label class="num-candle" for="candle-${i + 2}">${format(i + 2)}</label>
+            let div = document.createElement("div")
+            let input = document.createElement("input")
+            div.className = 'flex candle'
+            input.type = 'number'
+            input.placeholder = `Свеча ${i + 2}`
+            input.className = 'input'
+            div.appendChild(input)
+            _form.appendChild(div)
         }
     }
 })

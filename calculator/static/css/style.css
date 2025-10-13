@@ -25,6 +25,9 @@
     padding: 5px;
     margin-bottom: 10px;
 }
+.block-candles {
+    padding-left: 23px;
+}
 .add-candle {
     height: 20px;
     width: 90%;
