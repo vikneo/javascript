@@ -16,37 +16,72 @@
         </ol>
     </div>
     <div class="container">
-        <div class="block-h1">
+        <div class="block h1">
             <h1 class="h1">Калькулятор для свечей</h1>
             <p class="description">
                 Калькулятор позволяет подсчитать и подобрать автомобильные свечи по сопртивлению
             </p>
+            <details class="details">
+                <summary>Инструкция</summary>
+                <ol>
+                    <li>В левой части вносятся данные свечей зажиг. (сопротивление)</li>
+                    <li>В правой части вносятся сопротивление проводов.</li>
+                    <li>Что бы увеличить для расчета кол-во свечей, нажмите кнопку "Добавить".</li>
+                    <li>Что бы убрать лишние поля, нажмите кнопку "Удалить".</li>
+                    <li>Что бы очистить все поля от данных, нажмите кнопку "Очистить".</li>
+                    <li>Для расчета введенных данных, нажмите кнопку "Расчитать".</li>
+                </ol>
+            </details>
             <div class="hidden">
-                <form action="">
-                    <div class="block-candles">
-                        <div class="flex candle">
-                            <label class="num-candle" for="candle-1">№1</label>
-                            <input class="input" type="text" name="candle-1">
+                <form action="" id="formCandle">
+                    <div class="grid block-form">
+                        <div class="block-candles">
+                            <div class="flex candle">
+                                <input class="input" type="number" name="candle-1" placeholder="Свеча 1">
+                            </div>
+                            <div class="flex candle">
+                                <input class="input" type="number" name="candle-2" placeholder="Свеча 2">
+                            </div>
+                            <div class="flex candle">
+                                <input class="input" type="number" name="candle-3" placeholder="Свеча 3">
+                            </div>
+                            <div class="flex candle">
+                                <input class="input" type="number" name="candle-4" placeholder="Свеча 4">
+                            </div>
                         </div>
-                        <div class="flex candle">
-                            <label class="num-candle" for="candle-2">№2</label>
-                            <input class="input" type="text" name="candle-2">
+                        <div class="block-cords">
+                            <div class="flex cord">
+                                <input class="input" type="number" placeholder="Провод 1">
+                            </div>
+                            <div class="flex cord">
+                                <input class="input" type="number" placeholder="Провод 2">
+                            </div>
+                            <div class="flex cord">
+                                <input class="input" type="number" placeholder="Провод 3">
+                            </div>
+                            <div class="flex cord">
+                                <input class="input" type="number" placeholder="Провод 4">
+                            </div>
                         </div>
-                        <div class="flex candle">
-                            <label class="num-candle" for="candle-3">№3</label>
-                            <input class="input" type="text" name="candle-3">
-                        </div>
-                        <div class="flex candle">
-                            <label class="num-candle" for="candle-4">№4</label>
-                            <input class="input" type="text" name="candle-4">
+                        <div class="flex add-candle">
+                            <div>
+                                <input class="add" id="addCandle" name="add" type="button" value="+ Добавить" title="Добавить поле">
+                            </div>
+                            <div>
+                                <input class="remove" id="removeCandle" name="remove" type="button" value="- Удалить" title="Удалить поле">
+                            </div>
+                            <!-- <div>
+                                <input class="add-cord" id="addCord" name="remove" type="button" value="R проводов" title="Добавить сопр проводов">
+                            </div> -->
                         </div>
                     </div>
-                    <div class="flex add-candle">
-                        <input class="add" id="addCandle" name="add" type="button" value="+" title="Добавить еще свечу">
-                        <label for="add">Добавить свечу</label>
-                    </div>
-                    <div class="flex calculate">
-                        <input class="btn" type="button" value="Расчитать">
+                    <div class="flex action">
+                        <div class="flex calculate">
+                            <input class="btn calc" type="button" onclick="Prompt()" value="Расчитать">
+                        </div>
+                        <div class="flex clean">
+                            <input class="btn reset" type="button" value="Очистить">
+                        </div>
                     </div>
                 </form>
             </div>
