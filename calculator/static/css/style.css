@@ -17,17 +17,20 @@
 .align-items {
     align-items: center;
 }
-.candle {
+.candle,
+.cord {
     gap: 10px;
     font-size: 20px;
 }
-.candle > input {
+.candle > input,
+.cord > input {
     padding: 5px;
     margin-bottom: 10px;
 }
-.block-candles {
+/* .block-candles,
+.block-cords {
     padding-left: 23px;
-}
+} */
 .add-candle {
     height: 20px;
     width: 90%;
@@ -82,6 +85,10 @@
     align-items: center;
     justify-content: start;
 }
+.action {
+    width: 49%;
+    justify-content: space-between;
+}
 .clean > .btn {
     border-top-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -90,4 +97,11 @@
 }
 .bg-img {
     width: 50px;
+}
+.input {
+    width: 75%;
+}
+.caption {
+    padding-bottom: 15px;
+    font-size: 25px;
 }
