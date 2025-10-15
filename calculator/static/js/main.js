@@ -17,20 +17,66 @@ function format(idx = 0) {
     }
 }
 
-format()
+// format()
+// ======================================================= //
+// Проверка валидных данных в полях "input"
+let input_field = document.querySelectorAll(".candle")
 
+for (let i = 0; i < input_field.length; i++) {
+    let inp = input_field[i].addEventListener('input', function(e) {
+        console.log(inp)
+
+    })
+}
+
+// ======================================================= //
+// Добавление полей "input" для ввода данных свечей
 let click = document.querySelector("#addCandle").addEventListener('click', function(e) {
     let _form = document.querySelector(".block-candles")
     let columns = document.querySelectorAll(".candle")
     for (let i = columns.length - 1; i > 0; i-- ) {
         if (i === columns.length - 1) {
-            // alert(columns[i])
-            _form.innerHTML += `
-            <div class="flex candle">
-            <label class="num-candle" for="candle-${i + 2}">${format(i + 2)}</label>
-            <input class="input" type="text" name="candle-${i + 2}">
-            </div>
-            `
+            let div = document.createElement("div")
+            let input = document.createElement("input")
+            div.className = 'flex candle'
+            input.type = 'number'
+            input.placeholder = `Свеча ${i + 2}`
+            input.className = 'input'
+            div.appendChild(input)
+            _form.appendChild(div)
         }
     }
 })
+
+// ======================================================= //
+// Удаление полей "input" для ввода данных свечей
+let remove = document.querySelector("#removeCandle").addEventListener('click', function() {
+    let _form = document.querySelector(".block-candles")
+    let columns = document.querySelectorAll(".candle")
+    for (let i = columns.length - 1; i > 0; i--) {
+        if (i >= 4) {
+            if (i + 1 === columns.length) {
+                _form.removeChild(columns[i])
+            }
+        }
+    }
+})
+
+// ======================================================= //
+// Очистить форму ввода данных 
+let reset_form = document.querySelector(".reset").addEventListener('click', function() {
+    let form_reset = document.querySelector("#formCandle")
+    console.log(form_reset)
+    formCandle.reset()
+})
+
+function Prompt() {
+    let errorRate = +prompt(`
+    Введите погрешность для расчета в MOm.\n
+    При расчетах для подбора комплекта
+    будет учитваться погрешность в диапазоне
+    от 0 до <вводимого значения>.`)
+    if(errorRate) {
+        alert(`Вы ввели ${errorRate}`)
+    }
+}
