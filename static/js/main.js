@@ -11,7 +11,6 @@ function clock() {
     let second      = date.getSeconds()
 
     let month       = monthhArray[date.getMonth()]
-    let week        = weekDay[date.getDay()]
 
     if (day < 10) day       = `0${day}`
     if (hour < 10) hour     = `0${hour}`

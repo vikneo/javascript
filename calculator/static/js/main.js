@@ -169,7 +169,7 @@ function calculate() {
         let candlesArray = readData(candles, cords)[0]
         let cordsArray = readData(candles, cords)[1]
         let calc = []
-
+        
         for (let candl of candlesArray) {
             let r = []
             for (let cord of cordsArray ) {
@@ -177,8 +177,11 @@ function calculate() {
             }
             calc.push(r)
         }
-
+        
         formatOut(sorting(calc))
+
+        let audioAlert = document.querySelector("#kolokol").play() 
+        console.log(audioAlert)
     }
     catch (Error) {
         console.log(`Описание ошибки: ${Error}`)
