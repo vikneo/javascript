@@ -1,7 +1,7 @@
 function clock() {
     let date = new Date()
 
-    let monthhArray = ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"]
+    let monthhArray = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сенября", "октября", "ноября", "декабря"]
     let weekDay     = ["Вск", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]
 
     let year        = date.getFullYear()
@@ -20,14 +20,10 @@ function clock() {
 
     let title = document.querySelector(".title")
     title.innerHTML = `
-    <p class="time-upload">
-    <span style="padding-right: 25px; color: brown; font-size: smaller">
-    ${year}г. ${month} ${day} ${week}
-    </span>
-    <span style="padding-left: 20px; font-size: 25px; color: aqua;">
-    ${hour}:${minute}:${second}
-    </span>
-    </p>
+    <div class="flex clock">
+        <div class="time-block">${hour}:${minute}:${second}</div>
+        <div class="day-block">${day} ${month} ${year}г.</div>
+    </div>
     `
 }
 
