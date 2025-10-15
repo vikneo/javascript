@@ -65,18 +65,125 @@ let remove = document.querySelector("#removeCandle").addEventListener('click', f
 // ======================================================= //
 // Очистить форму ввода данных 
 let reset_form = document.querySelector(".reset").addEventListener('click', function() {
-    let form_reset = document.querySelector("#formCandle")
-    console.log(form_reset)
+    let result = document.querySelector(".results")
+    document.querySelector("#formCandle")
+    console.log("Форма очищена!")
     formCandle.reset()
+    result.innerHTML = ``
+    
 })
 
-function Prompt() {
-    let errorRate = +prompt(`
-    Введите погрешность для расчета в MOm.\n
-    При расчетах для подбора комплекта
-    будет учитваться погрешность в диапазоне
-    от 0 до <вводимого значения>.`)
-    if(errorRate) {
-        alert(`Вы ввели ${errorRate}`)
+function readData(candles, cords) {
+    // Функция преобразовывает данные в type: float и
+    // заполняет массивы сопротивление свечей и высовольтных проводов для дальнейших расчетов
+
+    let candlesArray = []
+    let cordsArray = []
+
+    for (let candle of candles) {
+        let val = parseFloat(candle.querySelector(".input").value)
+        if (val > 0) {
+            candlesArray.push(val)
+        }
+    }
+    
+    for (let cord of cords) {
+        let val = parseFloat(cord.querySelector(".input").value)
+        if (val > 0) {
+            cordsArray.push(val)
+        }
+    }
+    
+    if (candlesArray.length !== candles.length) {
+        alert("Не все поля звполнены для свечей!");
+        throw new Error("Не все поля звполнены для свечей!")
+    }
+    if (cordsArray.length !== cords.length) {
+        alert("Заполните все поля для проводов!")
+        throw new Error("Заполните все поля для проводов!")
+    }
+
+    return [candlesArray, cordsArray]
+}
+
+function sorting(array) {
+    // Функция подсчитывает значение из массивов свечей и проводов.
+    // Подбирает по ближайшему значению, добавляет и возвращает новый массив.
+
+    let elemArray = []
+    let elem1
+
+    for(let i = 0; i < array.length; i++) {
+        for(let j = 0; j < array[i].length; j++) {
+            if(i % 4 === 0) {
+                if (j % 4 === 0) {
+                    elem1 = array[i][j]
+                    elemArray.push(elem1)
+                    break
+                }
+            }
+            if (j + i % 4 <= array[i].length) {
+                let r = 0
+                let remains = array[i].slice(i % 4 + j)
+                let old = 999
+                for(let elm of remains) {
+                    if (old >= Math.abs(elem1 - elm)) {
+                        old = Math.abs(elem1 - elm)
+                        r = elm
+                    }
+                }
+                elemArray.push(r)
+                break
+            }
+        }
+    }
+    return elemArray
+}
+
+function formatOut(array) {
+    // Функция форматирует вывод на экран готовые данные
+    // ToDo дописать функцию lдля точного определения комплектов
+
+    let result = document.querySelector(".results")
+    let x = 1
+
+    result.innerHTML = `<em style="color: red">Временное оформление</em><br><br>`
+    for (let i = 0; i < array.length; i++) {
+        if(i % 4 === 0) {
+            result.innerHTML += `<strong>Комплект №${x}</strong>`
+            x++
+        }
+        result.innerHTML += `
+        <p style="color: black">Свеча <b>№${i + 1}</b> - Провод <b>№${i % 4 +1}</b> = <span style="color: red">${array[i]}</span> MOм</p>
+        `
+    }
+}
+
+function calculate() {
+    // Функция считывает и проверяет заполнение полей "input" и 
+    // добавляет в массивы сопротивление свечей и высовольтных проводов.
+    const candles = document.querySelectorAll(".candle")
+    const cords = document.querySelectorAll(".cord")
+    
+    try {
+        let candlesArray = readData(candles, cords)[0]
+        let cordsArray = readData(candles, cords)[1]
+        let calc = []
+        
+        for (let candl of candlesArray) {
+            let r = []
+            for (let cord of cordsArray ) {
+                r.push(parseFloat((cord + candl).toFixed(2)))
+            }
+            calc.push(r)
+        }
+        
+        formatOut(sorting(calc))
+
+        let audioAlert = document.querySelector("#kolokol").play() 
+        console.log(audioAlert)
+    }
+    catch (Error) {
+        console.log(`Описание ошибки: ${Error}`)
     }
 }

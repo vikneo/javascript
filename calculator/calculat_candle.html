@@ -37,30 +37,42 @@
                     <div class="grid block-form">
                         <div class="block-candles">
                             <div class="flex candle">
-                                <input class="input" type="number" name="candle-1" placeholder="Свеча 1">
+                                <input class="input" type="number" name="candle-1" placeholder="Свеча 1" value="3.84">
                             </div>
                             <div class="flex candle">
-                                <input class="input" type="number" name="candle-2" placeholder="Свеча 2">
+                                <input class="input" type="number" name="candle-2" placeholder="Свеча 2" value="4.45">
                             </div>
                             <div class="flex candle">
-                                <input class="input" type="number" name="candle-3" placeholder="Свеча 3">
+                                <input class="input" type="number" name="candle-3" placeholder="Свеча 3" value="4.86">
                             </div>
                             <div class="flex candle">
-                                <input class="input" type="number" name="candle-4" placeholder="Свеча 4">
+                                <input class="input" type="number" name="candle-4" placeholder="Свеча 4" value="5.22">
+                            </div>
+                            <div class="flex candle">
+                                <input class="input" type="number" name="candle-1" placeholder="Свеча 1" value="4.16">
+                            </div>
+                            <div class="flex candle">
+                                <input class="input" type="number" name="candle-2" placeholder="Свеча 2" value="4.75">
+                            </div>
+                            <div class="flex candle">
+                                <input class="input" type="number" name="candle-3" placeholder="Свеча 3" value="5.66">
+                            </div>
+                            <div class="flex candle">
+                                <input class="input" type="number" name="candle-4" placeholder="Свеча 4" value="5.44">
                             </div>
                         </div>
                         <div class="block-cords">
                             <div class="flex cord">
-                                <input class="input" type="number" placeholder="Провод 1">
+                                <input class="input" type="number" placeholder="Провод 1" value="6.28">
                             </div>
                             <div class="flex cord">
-                                <input class="input" type="number" placeholder="Провод 2">
+                                <input class="input" type="number" placeholder="Провод 2" value="5.67">
                             </div>
                             <div class="flex cord">
-                                <input class="input" type="number" placeholder="Провод 3">
+                                <input class="input" type="number" placeholder="Провод 3" value="5.43">
                             </div>
                             <div class="flex cord">
-                                <input class="input" type="number" placeholder="Провод 4">
+                                <input class="input" type="number" placeholder="Провод 4" value="5.47">
                             </div>
                         </div>
                         <div class="flex add-candle">
@@ -77,7 +89,8 @@
                     </div>
                     <div class="flex action">
                         <div class="flex calculate">
-                            <input class="btn calc" type="button" onclick="Prompt()" value="Расчитать">
+                            <input class=" trigger btn calc" type="button" onclick="calculate()" value="Расчитать">
+                            <audio id="kolokol" src="static/media/ships-bell-3_mjskawvu.mp3"></audio>
                         </div>
                         <div class="flex clean">
                             <input class="btn reset" type="button" value="Очистить">
@@ -87,10 +100,11 @@
             </div>
             <div>
                 <h2>Результат:</h2>
-                <div class=""></div>
+                <div class="results"></div>
             </div>
         </div>
     </div>
+
     <script src="static/js/main.js"></script>
 </body>
 </html>
