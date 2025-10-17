@@ -1,3 +1,31 @@
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #222222;
+    --text-color: #ffffff;
+    --accent-color: #00a7ff;
+  }
+}
+
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --accent-color: #007bff;
+}
+ 
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+ 
+a {
+  color: var(--accent-color);
+}
+body.dark-theme {
+  --background-color: #222222;
+  --text-color: #ffffff;
+  --accent-color: #00a7ff;
+}
+
 .title {
     border: 1px solid black;
     border-radius: 10px;

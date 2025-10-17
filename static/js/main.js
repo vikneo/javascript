@@ -27,3 +27,7 @@ function clock() {
 }
 
 setInterval(clock, 1000)
+
+document.getElementById('theme-toggle').addEventListener('click', function () {
+  document.body.classList.toggle('dark-theme');
+});
