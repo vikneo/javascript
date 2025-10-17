@@ -27,6 +27,7 @@ body.dark-theme {
 }
 
 .title {
+    height: 91px;
     border: 1px solid black;
     border-radius: 10px;
     background-color: #707173;
