@@ -28,48 +28,61 @@ let goodsArray = [
     }
 ]
 
-if (!localStorage.getItem('goods')) {
-    localStorage.setItem('goods', JSON.stringify(goodsArray))
-}
+let userList
 
 let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
     keyboard: false
 })
 
-document.querySelector('button.add_new').addEventListener('click', function(e) {
-    let name = document.getElementById('good_name').value
-    let price = document.getElementById('good_price').value
-    let count = document.getElementById('good_count').value
+if (!localStorage.getItem('goods')) {
+    localStorage.setItem('goods', JSON.stringify(goodsArray))
+}
 
-    if (name && price && count) {
-        document.getElementById('good_name').value = ''
-        document.getElementById('good_price').value = ''
-        document.getElementById('good_count').value = '1'
-
-        let goods = JSON.parse(localStorage.getItem('goods'))
-        goods.push({
-            "id": goods.length,
-            "name": name,
-            "price": price,
-            "count": count,
-            "cart_count": 0,
-            "cart_discount": 0,
-            "cart_price": 0,
-        })
-        localStorage.setItem('goods', JSON.stringify(goods))
-        // update_goods()
-
-        myModal.hide()
-    } else {
-        Swal.fire({
-            icon: 'error',
-            title: 'Ошибка...',
-            text: 'Заполнены не все поля!',
-        })
-    }
-})
+function addProduct() {
+    document.querySelector('button.add_new').addEventListener('click', function(e) {
+        let name = document.getElementById('good_name').value
+        let price = document.getElementById('good_price').value
+        let count = document.getElementById('good_count').value
+    
+        if (name && price && count) {
+            document.getElementById('good_name').value = ''
+            document.getElementById('good_price').value = ''
+            document.getElementById('good_count').value = '1'
+    
+            let goods = JSON.parse(localStorage.getItem('goods'))
+            goods.push({
+                "id": goods.length,
+                "name": name,
+                "price": price,
+                "count": count,
+                "cart_count": 0,
+                "cart_discount": 0,
+                "cart_price": 0,
+            })
+            localStorage.setItem('goods', JSON.stringify(goods))
+            update_goods()
+    
+            myModal.hide()
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Ошибка...',
+                text: 'Заполнены не все поля!',
+            })
+        }
+    })
+}
 
 update_goods()
+
+function searche() {
+    // Функция возвращает объект с массивом названий полей для поиска
+    let options = {
+        valueNames: ['name', 'price']
+    }
+
+    return options
+}
 
 function update_goods() {
     let result_price = 0
@@ -90,8 +103,8 @@ function update_goods() {
                     <td class="name">${goods[i].name}</td>
                     <td class="price">${goods[i].price}</td>
                     <td>${goods[i].count}</td>
-                    <td><button class="good_delete btn btn-danger" data-delete="${goods[i].id}">&#10006;</button></td>
-                    <td><button class="good_delete btn btn-info" data-goods="${goods[i].id}">&#10149;</button></td>
+                    <td><button class="good_delete btn btn-danger" data-delete="${goods[i].id}" data-name="${goods[i].name}">&#10006;</button></td>
+                    <td><button class="good_delete btn btn-info" data-goods="${goods[i].id}" data-name="${goods[i].name}">&#10149;</button></td>
                 </tr>
                 `
             )
@@ -117,9 +130,44 @@ function update_goods() {
                 )
             }
         }
+        userList = new List('goods', searche())
     } else {
         table1.hidden = true
         table2.hidden = true
     }
     document.querySelector('.price_result').innerHTML = result_price + ' &#8381;'
 }
+
+document.querySelector('.list').addEventListener('click', function(e) {
+    // Функция выбирает товар по ID и удаляет его из массива
+    
+    if(!e.target.dataset.delete) return
+    let name_good = e.target.dataset.name
+    
+    Swal.fire({
+        icon: "question",
+        title: `Вы действительно хотите удалить "${name_good}"?`,
+        showCancelButton: true,
+        cancelButtonColor:"#dc3545",
+        cancelButtonText: "Отмена",
+        confirmButtonColor: "rgb(53 163 253)",
+        confirmButtonText: "Да",
+    }).then((result) => {
+        if(result.isConfirmed) {
+            let goods = JSON.parse(localStorage.getItem("goods"))
+
+            for(let i = 0; i < goods.length; i++) {
+                if(goods[i].id === +e.target.dataset.delete) {        
+                    goods.splice(i, 1)
+                    localStorage.setItem('goods', JSON.stringify(goods))
+                    update_goods()
+                }
+            }
+            Swal.fire({
+                title: `"${name_good}" удален!`,
+                icon: "success",
+                draggable: true
+            })
+        }
+    })
+})
