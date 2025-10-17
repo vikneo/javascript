@@ -65,7 +65,7 @@ function searche() {
 
 function sortTable(colNum, type, id) {
     // Функция позволяет отсортировать данные таблицы по названию колонок
-    
+
     let elem = document.getElementById(id)
     let tbody = elem.querySelector('tbody')
     let rowsArray = Array.from(tbody.rows)
@@ -239,6 +239,26 @@ document.querySelector('.cart').addEventListener('click', function(e) {
             goods[i].cart_count -= 1
             localStorage.setItem('goods', JSON.stringify(goods))
             update_goods()
+        }
+    }
+})
+
+document.querySelector('.cart').addEventListener('input', function(e) {
+    // Функция подсчитывает стоимость товара в корзине с учетом скидки
+
+    if (!e.target.dataset.goodid) return
+
+    let goods = JSON.parse(localStorage.getItem('goods'))
+
+    for(let i = 0; i < goods.length; i++) {
+        if (goods[i].id === +e.target.dataset.goodid) {
+            goods[i].cart_discount = e.target.value
+            localStorage.setItem('goods', JSON.stringify(goods))
+            update_goods()
+
+            let input = document.querySelector(`[data-goodid="${goods[i].id}"]`)
+            input.focus()
+            input.selectionStart = input.value.length
         }
     }
 })
