@@ -141,22 +141,45 @@ function sorting(array) {
 }
 
 function formatOut(array) {
-    // Функция форматирует вывод на экран готовые данные
+    // Функция форматирует вывод на экран с готовыми данными
+
     // ToDo дописать функцию lдля точного определения комплектов
 
     let result = document.querySelector(".results")
+    let candleObjArray = []
     let x = 1
 
-    result.innerHTML = `<em style="color: red">Временное оформление</em><br><br>`
     for (let i = 0; i < array.length; i++) {
+        candleObjArray.push(
+            {
+                'id': i,
+                'candle': i + 1,
+                'cord': i % 4 + 1,
+                'result': array[i],
+            }
+        )
+    }
+
+    // candleObjArray.sort(function(a, b) {
+    //     return a.result - b.result
+    // })
+
+    result.innerHTML = `<em style="color: red">Временное оформление</em><br><br>`
+    for (let i = 0; i < candleObjArray.length; i++) {
         if(i % 4 === 0) {
             result.innerHTML += `<strong>Комплект №${x}</strong>`
             x++
         }
+        
         result.innerHTML += `
-        <p style="color: black">Свеча <b>№${i + 1}</b> - Провод <b>№${i % 4 +1}</b> = <span style="color: red">${array[i]}</span> MOм</p>
+        <p style="color: black">
+        Свеча <b>№${candleObjArray[i].candle}</b> - Провод <b>№${candleObjArray[i].cord}</b> = <span style="color: red">
+        ${candleObjArray[i].result}</span> MOм
+        </p>
         `
     }
+
+    return candleObjArray
 }
 
 function calculate() {
@@ -180,8 +203,7 @@ function calculate() {
         
         formatOut(sorting(calc))
 
-        let audioAlert = document.querySelector("#kolokol").play() 
-        console.log(audioAlert)
+        // let audioAlert = document.querySelector("#kolokol").play()
     }
     catch (Error) {
         console.log(`Описание ошибки: ${Error}`)
