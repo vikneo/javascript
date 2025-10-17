@@ -188,3 +188,19 @@ document.querySelector('.list').addEventListener('click', function(e) {
         }
     }
 })
+
+document.querySelector('.cart').addEventListener('click', function(e) {
+    // Функция для удаление товара из карзины
+
+    let goods = JSON.parse(localStorage.getItem('goods'))
+    if (!e.target.dataset.delete) return
+
+    for (let i = 0; i < goods.length; i++) {
+        if (goods[i].cart_count > 0 && goods[i].id === +e.target.dataset.delete) {
+            goods[i].count += 1
+            goods[i].cart_count -= 1
+            localStorage.setItem('goods', JSON.stringify(goods))
+            update_goods()
+        }
+    }
+})
