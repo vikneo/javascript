@@ -1,4 +1,5 @@
 .title {
+    height: 89px;
     border: 1px solid black;
     border-radius: 10px;
     background-color: #707173;
@@ -29,11 +30,16 @@
     max-width: 800px;
     margin: 30px auto;
 }
-.candle-block {
+.card-block {
     align-items: center;
+    margin-bottom: 15px;
+}
+.card-block:nth-last-child {
+    margin-bottom: 0;
 }
 .candle-img {
     width: 80px;
+    margin-right: 20px;
 }
 .candle-link {
     padding: 0 10px;
