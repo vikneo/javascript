@@ -24,6 +24,7 @@ function clock() {
         <div class="day-block">${day} ${month} ${year}г.</div>
     </div>
     `
+    setInterval(clock, 1000)
 }
 
-setInterval(clock, 1000)
+clock()
