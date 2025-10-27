@@ -1,3 +1,4 @@
+let cnt = 0;
 
 function initField() {
     // Инициализируем игровое поле устанавливаем высоту равной ширине
@@ -111,6 +112,11 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
 
         let id = +numElem.id
         let target = e.target;
+        
+        if (target.innerText !== '') {
+            cnt++
+            counter(cnt)
+        }
 
         if(elemArr.includes(target)) {
             let buffer = target.innerHTML;
@@ -128,7 +134,6 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
             numb[numb.indexOf(0)] = '';
             randomArray = numb;
         }
-
         // Добавить условия для проверки на окончание игры
     }
     catch (error) {
@@ -137,5 +142,12 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
 
 
 })
+
+function counter(cnt) {
+    let count = document.getElementById('count')
+    
+    // count.style.width = '200px'
+    count.innerHTML = `Кол-во ходов: <span style="min-width: 50px;">${cnt}</span>`
+}
 
 createFieldTick(randomArray)

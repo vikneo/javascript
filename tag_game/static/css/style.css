@@ -37,3 +37,13 @@ td {
 /* .triks_elem:hover {
     background-color: #ee9528 !important;
 } */
+
+.statistic {
+    margin-left: 25px;
+}
+
+.counter {
+    width: 250px;
+    font-size: 20px;
+    font-weight: 700;
+}
