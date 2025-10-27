@@ -1,0 +1,35 @@
+td {
+    border-radius: 13px;
+}
+
+.tag_title {
+    margin-bottom: 25px;
+    justify-content: center;
+}
+
+.game_block {
+    justify-content: center;
+}
+
+.game_field {
+    width: 40%;
+    margin: 0;
+    border: 10px solid #25955e;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.table-bordered {
+    width: 100%;
+    height: 100%;
+}
+
+.triks_elem {
+    padding: 13px;
+    text-align: center;
+    font-size: x-large;
+    font-weight: 800;
+    color: #9d2525;
+    background-color: #fbb96b;
+    border: 6px solid #f3f3f3 !important;
+}
