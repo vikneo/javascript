@@ -13,8 +13,12 @@ function createTricksArray() {
     // Создаем массив с номерами фишек для игры
     initField();
     const numArray = [];
-    for (let i = 0; i < 16; i++) {
-        numArray.push(i);
+    for (let i = 0; i <= 16; i++) {
+        if ( i === 0) {
+             numArray.push('');
+        } else {
+            numArray.push(i);
+        }
     }
     return numArray;
 }
@@ -33,14 +37,15 @@ function createFieldTick(ticks_array) {
 
         let td = document.createElement('td');
         td.className = 'triks_elem';
-        td.id = `${i + 1}`;
+        td.style.width = '24%'
+        td.id = `${i}`;
 
         let num = ticksArray[i]
         if (num > 0 && num < 10) {
-            td.innerHTML = `&nbsp;&nbsp;${num}`;
+            td.innerHTML = `  ${num}`;
         }
-        else if (num === 0) {
-            td.innerHTML = ''
+        else if (num === '') {
+            // td.innerHTML = ''
             td.style.backgroundColor = '#bbb2b2'
         } else {
             td.innerHTML = num;
@@ -78,20 +83,59 @@ function randomSort(numArray) {
 }
 
 // =======================================================
+//     Обработчик для обмена елементами
+// =======================================================
+
+let factArrayNumber = createTricksArray()
+let randomArray = randomSort(factArrayNumber)
 
 document.querySelector('.table-bordered').addEventListener('click', function(e) {
-    let id = e.target.id
+    
+    let elemArr = [], numElem;
+    
     try {
-        let numElem = +document.getElementById(id).innerText
+        for (let i = 0; i < randomArray.length; i++) {
+            document.getElementById(i).innerHTML = randomArray[i]
+            if (randomArray[i] == '') {
+                numElem = document.getElementById(i);
+                if (document.getElementById(i - 1) && i !== 4 && i !== 8 && i !== 12)
+                    elemArr.push(document.getElementById(i - 1));
+                if (document.getElementById(i + 1) && i !== 3 && i !== 7 && i !== 11)
+                    elemArr.push(document.getElementById(i + 1));
+                if (document.getElementById(i - 4))
+                    elemArr.push(document.getElementById(i - 4));
+                if (document.getElementById(i + 4))
+                    elemArr.push(document.getElementById(i + 4));
+            }
+        }
 
-        console.log(numElem)
+        let id = +numElem.id
+        let target = e.target;
 
+        if(elemArr.includes(target)) {
+            let buffer = target.innerHTML;
+            let idx = randomArray.indexOf(+target.innerHTML);
+            target.innerHTML = ''
+            target.style.backgroundColor = '#bbb2b2'
+            numElem.innerHTML = buffer;
+            numElem.style.backgroundColor = '#fbb96b'
+
+            let numb = [];
+            for(let i = 0; i < randomArray.length; i++){
+                numb.push(Number(document.getElementById(i.toString()).innerHTML));
+                // Добавить и обновить localStorage()
+            }
+            numb[numb.indexOf(0)] = '';
+            randomArray = numb;
+        }
+
+        // Добавить условия для проверки на окончание игры
     }
     catch (error) {
         console.log(`Границу доски не кликаем! Описание: ${error}`)
     }
+
+
 })
 
-let factArrayNumber = createTricksArray()
-let randomArray = randomSort(factArrayNumber)
 createFieldTick(randomArray)
