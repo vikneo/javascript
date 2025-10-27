@@ -81,12 +81,14 @@ function randomSort(numArray) {
 
 document.querySelector('.table-bordered').addEventListener('click', function(e) {
     let id = e.target.id
-    let num = document.getElementById(id).innerText
-    if (num === '') {
-        console.log('0')
-    } else {
+    try {
+        let numElem = +document.getElementById(id).innerText
 
-        console.log(num)
+        console.log(numElem)
+
+    }
+    catch (error) {
+        console.log(`Границу доски не кликаем! Описание: ${error}`)
     }
 })
 
