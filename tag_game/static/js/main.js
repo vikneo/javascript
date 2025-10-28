@@ -14,13 +14,14 @@ function createTricksArray() {
     // Создаем массив с номерами фишек для игры
     initField();
     const numArray = [];
-    for (let i = 0; i <= 16; i++) {
-        if ( i === 0) {
+    for (let i = 0; i < 16; i++) {
+        if ( i === 15) {
              numArray.push('');
         } else {
-            numArray.push(i);
+            numArray.push(i + 1);
         }
     }
+
     return numArray;
 }
 
