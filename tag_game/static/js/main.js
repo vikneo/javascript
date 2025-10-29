@@ -1,4 +1,5 @@
 let cnt = 0;
+let gameOver = true;
 
 function initField() {
     // Инициализируем игровое поле устанавливаем высоту равной ширине
@@ -92,7 +93,6 @@ let factArrayNumber = createTricksArray()
 let randomArray = randomSort(factArrayNumber)
 
 document.querySelector('.table-bordered').addEventListener('click', function(e) {
-    
     let elemArr = [], numElem;
     
     try {
@@ -110,7 +110,7 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
                     elemArr.push(document.getElementById(i + 4));
             }
         }
-
+        
         let id = +numElem.id
         let target = e.target;
         
@@ -118,37 +118,40 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
             cnt++
             counter(cnt)
         }
-
-        if(elemArr.includes(target)) {
-            let buffer = target.innerHTML;
-            let idx = randomArray.indexOf(+target.innerHTML);
-            target.innerHTML = ''
-            target.style.backgroundColor = '#bbb2b2'
-            numElem.innerHTML = buffer;
-            numElem.style.backgroundColor = '#fbb96b'
-
-            let numb = [];
-            for(let i = 0; i < randomArray.length; i++){
-                numb.push(Number(document.getElementById(i.toString()).innerHTML));
-                // Добавить и обновить localStorage()
+        
+        if (randomArray.join('') !== factArrayNumber.join('')) {
+            if(elemArr.includes(target)) {
+                let buffer = target.innerHTML;
+                let idx = randomArray.indexOf(+target.innerHTML);
+                target.innerHTML = ''
+                target.style.backgroundColor = '#bbb2b2'
+                numElem.innerHTML = buffer;
+                numElem.style.backgroundColor = '#fbb96b'
+                
+                let numb = [];
+                for(let i = 0; i < randomArray.length; i++){
+                    numb.push(Number(document.getElementById(i.toString()).innerHTML));
+                    // Добавить и обновить localStorage()
+                }
+                numb[numb.indexOf(0)] = '';
+                randomArray = numb;
             }
-            numb[numb.indexOf(0)] = '';
-            randomArray = numb;
+        } else {
+            console.log("You win!");
+            gameOver = false;
         }
-        // Добавить условия для проверки на окончание игры
     }
     catch (error) {
         console.log(`Границу доски не кликаем! Описание: ${error}`)
     }
-
-
 })
+
 
 function counter(cnt) {
     let count = document.getElementById('count')
     
-    // count.style.width = '200px'
-    count.innerHTML = `Кол-во ходов: <span style="min-width: 50px;">${cnt}</span>`
+    if (gameOver)
+        count.innerHTML = `Кол-во ходов: <span style="min-width: 50px;">${cnt}</span>`
 }
 
 createFieldTick(randomArray)
