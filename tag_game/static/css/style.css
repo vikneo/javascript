@@ -12,8 +12,8 @@ td {
 }
 
 .game_field {
-    width: 40%;
-    margin: 0;
+    width: 100%;
+    margin-bottom: 25px;
     border: 10px solid #25955e;
     border-radius: 5px;
     background-color: #ffffff;

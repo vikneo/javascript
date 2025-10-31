@@ -6,7 +6,7 @@ function initField() {
 
     let field_game = document.querySelector(".game_field");
     let width_size = getComputedStyle(field_game);
-    field_game.style.height = `${width_size.width}`;
+    field_game.style.min_height = `${width_size.width}`;
 }
 
 
@@ -159,7 +159,8 @@ function counter(cnt) {
         count.innerHTML = `Кол-во ходов: <span style="min-width: 50px;">${cnt}</span>`;
         reload(input);
     } else {
-        input.value = "Еще разок?";
+        input.value = "Еще разок";
+        input.style.backgroundColor = '#4caf50c2'
         reload(input);
     }
 
@@ -167,6 +168,7 @@ function counter(cnt) {
 
 
 let factArrayNumber = createTricksArray()
-let randomArray = randomSort(factArrayNumber)
+// let randomArray = randomSort(factArrayNumber)
+let randomArray = factArrayNumber
 
 createFieldTick(randomArray)
