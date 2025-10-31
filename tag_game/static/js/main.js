@@ -171,4 +171,5 @@ let factArrayNumber = createTricksArray()
 let randomArray = randomSort(factArrayNumber)
 // let randomArray = factArrayNumber  // for debug
 
+
 createFieldTick(randomArray)
