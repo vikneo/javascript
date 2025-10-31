@@ -169,6 +169,7 @@ function counter(cnt) {
 
 let factArrayNumber = createTricksArray()
 let randomArray = randomSort(factArrayNumber)
-// let randomArray = factArrayNumber // for debug
+// let randomArray = factArrayNumber  // for debug
+
 
 createFieldTick(randomArray)
