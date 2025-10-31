@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <title>Tag game</title>
+</head>
+
+<body>
+    <div class="bread-crumbs conteiner">
+        <ol class="flex">
+            <li><a href="../index.html">Главная</a></li>
+            <li class="arrow-right">&gt;</li>
+            <li>Tag game</li>
+        </ol>
+    </div>
+    <div class="conteiner">
+        <div class="flex tag_title">
+            <h2>Игра в &#171;Пятнашки&#187;</h2>
+        </div>
+        <div class="container">
+            <div style="width: 290px; margin: 0 auto;">
+                <div class="game_field">
+                      <table class="table-bordered" onselectstart="return false" onmousedown="return false">
+    
+                    </table>
+                </div>
+                <div class="statistic">
+                    <div id="count" class="counter">
+                        Кол-во ходов: <span style="min-width: 50px;">0</span>
+                    </div>
+                    <div class="action">
+                        <input id="reset" type="button" class="button" value="Переиграть">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+
+</html>
