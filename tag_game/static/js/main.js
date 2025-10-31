@@ -2,8 +2,8 @@ let cnt = 0;
 let gameOver = true;
 
 let factArrayNumber = createTricksArray()
-// let randomArray = randomSort(factArrayNumber)
-let randomArray = factArrayNumber // for debug
+let randomArray = randomSort(factArrayNumber)
+// let randomArray = factArrayNumber // for debug
 
 function initField() {
     // Инициализируем игровое поле устанавливаем высоту равной ширине
