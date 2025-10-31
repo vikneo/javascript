@@ -1,6 +1,10 @@
 let cnt = 0;
 let gameOver = true;
 
+let factArrayNumber = createTricksArray()
+// let randomArray = randomSort(factArrayNumber)
+let randomArray = factArrayNumber // for debug
+
 function initField() {
     // Инициализируем игровое поле устанавливаем высоту равной ширине
 
@@ -111,12 +115,12 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
         let id = +numElem.id
         let target = e.target;
         
-        if (target.innerText !== '') {
-            cnt++
-            counter(cnt)
-        }
-        
-        if (randomArray.join('') !== factArrayNumber.join('')) {
+        if (checkGameOver()) {
+            if (target.innerText !== '') {
+                cnt++
+                counter(cnt)
+            }
+
             if(elemArr.includes(target)) {
                 let buffer = target.innerHTML;
                 randomArray.indexOf(+target.innerHTML);
@@ -134,8 +138,7 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
                 randomArray = numb;
             }
         } else {
-            console.log("You win!");
-            gameOver = false;
+            counter(cnt)
         }
     }
     catch (error) {
@@ -149,6 +152,24 @@ function reload(button) {
             window.location.reload()
         }
     })
+}
+
+function checkGameOver() {
+    let cnt = 0;
+    for (let i = 0; i < factArrayNumber.length; i++) {
+        if (randomArray[i] === factArrayNumber[i]) {
+            cnt++
+        }
+    }
+
+    if(cnt === factArrayNumber.length) {
+        gameOver = false;
+        console.log("You win!")
+        return false
+
+    }
+
+    return true;
 }
 
 function counter(cnt) {
@@ -165,10 +186,5 @@ function counter(cnt) {
     }
 
 }
-
-
-let factArrayNumber = createTricksArray()
-let randomArray = randomSort(factArrayNumber)
-// let randomArray = factArrayNumber // for debug
 
 createFieldTick(randomArray)
