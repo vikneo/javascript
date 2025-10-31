@@ -89,9 +89,6 @@ function randomSort(numArray) {
 //     Обработчик для обмена елементами
 // =======================================================
 
-let factArrayNumber = createTricksArray()
-let randomArray = randomSort(factArrayNumber)
-
 document.querySelector('.table-bordered').addEventListener('click', function(e) {
     let elemArr = [], numElem;
     
@@ -122,7 +119,7 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
         if (randomArray.join('') !== factArrayNumber.join('')) {
             if(elemArr.includes(target)) {
                 let buffer = target.innerHTML;
-                let idx = randomArray.indexOf(+target.innerHTML);
+                randomArray.indexOf(+target.innerHTML);
                 target.innerHTML = ''
                 target.style.backgroundColor = '#bbb2b2'
                 numElem.innerHTML = buffer;
@@ -146,12 +143,30 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
     }
 })
 
+function reload(button) {
+    button.addEventListener('click', function(e) {
+        if (e.target.value) {
+            window.location.reload()
+        }
+    })
+}
 
 function counter(cnt) {
     let count = document.getElementById('count')
+    let input = document.getElementById('reset')
     
-    if (gameOver)
-        count.innerHTML = `Кол-во ходов: <span style="min-width: 50px;">${cnt}</span>`
+    if (gameOver) {
+        count.innerHTML = `Кол-во ходов: <span style="min-width: 50px;">${cnt}</span>`;
+        reload(input);
+    } else {
+        input.value = "Еще разок?";
+        reload(input);
+    }
+
 }
+
+
+let factArrayNumber = createTricksArray()
+let randomArray = randomSort(factArrayNumber)
 
 createFieldTick(randomArray)

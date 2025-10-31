@@ -44,6 +44,21 @@ td {
 
 .counter {
     width: 250px;
+    margin-bottom: 35px;
     font-size: 20px;
     font-weight: 700;
+}
+
+.button {
+    margin-top: 5px;
+    margin-left: 5px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background-color: #24d49c85;
+    box-shadow: 3px 4px 9px #a29292;
+    font-weight: 500;
+}
+.button:hover {
+    margin: 0;
+    box-shadow: 8px 9px 6px  #a29292;
 }
