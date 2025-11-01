@@ -1,5 +1,62 @@
+let start = Date.now()
 let cnt = 0;
 let gameOver = true;
+let factArrayNumber = createTricksArray()
+
+let minute = 0
+let second = 0
+
+// Сохраняем новый перемешанный массив с номерами в LocalStorage();
+if (!localStorage.getItem('tags_game')) {
+    localStorage.setItem('tags_game', JSON.stringify([{"tags": randomSort(factArrayNumber), "count":cnt, "timer": [minute, second]}]));
+    // localStorage.setItem('tags_game', JSON.stringify(factArrayNumber)) // for debug
+    let randoTags = JSON.parse(localStorage.getItem("tags_game"));
+    createFieldTick(randoTags);
+} else {
+    createFieldTick(JSON.parse(localStorage.getItem('tags_game')))
+}
+
+function clockTimer(reset = false) {
+
+    let delta = Date.now() - start;
+    let seconds = Math.floor(delta / 1000);
+
+    second = seconds
+    second = seconds % 60
+    minute = Math.floor(seconds / 60)
+
+    formatTime(_minute=minute, _seconds=second)
+}
+
+function formatTime(_minute, _second) {
+    
+    if (_minute < 10) {
+        _minute = `0${_minute}`
+        if (`${_minute}`.length > 2) {
+            _minute = `${_minute[_minute.length - 2]}${_minute[_minute.length - 1]}`
+        }
+    }
+
+    if (_second < 10) {
+        _second = `0${_second}`
+        if (`${_second}`.length > 2) {
+            _second = `${_second[_second.length - 2]}${_second[_second.length - 1]}`
+        }
+    }
+    let newData = JSON.parse(localStorage.getItem("tags_game"))
+    let timerS = newData[0].timer
+    timerS[0] = _minute
+    timerS[1] = _second
+
+    localStorage.setItem("tags_game", JSON.stringify([{"tags": newData[0].tags, "count": newData[0].count, "timer": timerS}]))
+
+    let block_timer = document.querySelector(".timer")
+    block_timer.innerHTML = `
+    <div class="clock">
+        <div class="time-block" title="Время игры">${_minute}:${_second}</div>
+    </div>
+    `
+}
 
 function initField() {
     // Инициализируем игровое поле устанавливаем высоту равной ширине
@@ -13,11 +70,13 @@ function initField() {
 function createTricksArray() {
     // После инициализации игрового поля,
     // Создаем массив с номерами фишек для игры
+
     initField();
     const numArray = [];
+
     for (let i = 0; i < 16; i++) {
         if ( i === 15) {
-             numArray.push('');
+             numArray.push(' ');
         } else {
             numArray.push(i + 1);
         }
@@ -30,7 +89,7 @@ function createFieldTick(ticks_array) {
     // Создаем поля для игровых фишек и устанавливаем
     // значения из массива с номерами.
 
-    let ticksArray = ticks_array;
+    let ticksArray = ticks_array[0].tags;
     let border = document.querySelector('.table-bordered');
     let tr;
     for (let i = 0; i < ticksArray.length; i++) {
@@ -47,7 +106,7 @@ function createFieldTick(ticks_array) {
         if (num > 0 && num < 10) {
             td.innerHTML = `  ${num}`;
         }
-        else if (num === '') {
+        else if (num === ' ') {
             // td.innerHTML = ''
             td.style.backgroundColor = '#bbb2b2'
         } else {
@@ -61,18 +120,17 @@ function createFieldTick(ticks_array) {
 function randomSort(numArray) {
     // Создаем массив с рандомными не повторяющимися индексами от 1 до 15;
     // Копируем елемент по индексу из массива createTricksArray() - 1 в новый массив;
-    // Сохраняем новый перемешанный массив с номерами в LocalStorage;
 
     let curArray = [];
     let newArray = [];
-    let cnt = 0
+    let cntLocal = 0
 
-    while (cnt !== 16){
+    while (cntLocal !== 16){
         let num = Math.ceil(Math.random() * 16)
         
         if (curArray.indexOf(num) === -1) {
             curArray.push(num)
-            cnt++;
+            cntLocal++;
         }
     }
 
@@ -80,7 +138,6 @@ function randomSort(numArray) {
         let num = numArray[curArray[i] - 1]
         newArray.push(num)
     }
-    
 
     return newArray
 }
@@ -90,12 +147,18 @@ function randomSort(numArray) {
 // =======================================================
 
 document.querySelector('.table-bordered').addEventListener('click', function(e) {
+    // Обработчик события "click" при нажатии ЛКМ только на поле с цифрой;
+    // В цикле происходит поиск всех соседей с пустым полем;
+    // При клике по цифре, элемент с цифрой меняется местами с пустым полем;
+    // Новый массив объектов обновляется в LocalStorage();
+
     let elemArr = [], numElem;
+    let setTagsArray = JSON.parse(localStorage.getItem("tags_game"))
     
     try {
-        for (let i = 0; i < randomArray.length; i++) {
-            document.getElementById(i).innerHTML = randomArray[i]
-            if (randomArray[i] == '') {
+        for (let i = 0; i < setTagsArray[0].tags.length; i++) {
+            document.getElementById(i).innerHTML = setTagsArray[0].tags[i]
+            if (setTagsArray[0].tags[i] == ' ') {
                 numElem = document.getElementById(i);
                 if (document.getElementById(i - 1) && i !== 4 && i !== 8 && i !== 12)
                     elemArr.push(document.getElementById(i - 1));
@@ -108,34 +171,33 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
             }
         }
         
-        let id = +numElem.id
         let target = e.target;
+        let timerId;
         
-        if (target.innerText !== '') {
-            cnt++
-            counter(cnt)
-        }
-        
-        if (randomArray.join('') !== factArrayNumber.join('')) {
+        if (gameOver) {
+            timerId = setInterval(clockTimer(), 50)
             if(elemArr.includes(target)) {
                 let buffer = target.innerHTML;
-                randomArray.indexOf(+target.innerHTML);
-                target.innerHTML = ''
+                let numb = [];
+                let step = counter(e)
+    
+                setTagsArray[0].tags.indexOf(+target.innerHTML);
+                target.innerHTML = ' '
                 target.style.backgroundColor = '#bbb2b2'
                 numElem.innerHTML = buffer;
                 numElem.style.backgroundColor = '#fbb96b'
-                
-                let numb = [];
-                for(let i = 0; i < randomArray.length; i++){
+    
+                for(let i = 0; i < setTagsArray[0].tags.length; i++){
                     numb.push(Number(document.getElementById(i.toString()).innerHTML));
-                    // Добавить и обновить localStorage()
                 }
-                numb[numb.indexOf(0)] = '';
-                randomArray = numb;
+    
+                numb[numb.indexOf(0)] = ' ';
+                localStorage.setItem('tags_game', JSON.stringify([{"tags": numb, "count":step, "timer": [minute, second]}]))
+                updateResult()
             }
+            checkGameOver()
         } else {
-            console.log("You win!");
-            gameOver = false;
+            clearInterval(timerId)
         }
     }
     catch (error) {
@@ -144,32 +206,97 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
 })
 
 function reload(button) {
+    // Обработчик собития "click" при нажатии кноки "Переиграть" или "Еще разок"
+
     button.addEventListener('click', function(e) {
-        if (e.target.value) {
+        if (e.type === 'click') {
+            localStorage.setItem('tags_game', JSON.stringify([{"tags": randomSort(factArrayNumber), "count":counter(e, true), "timer": [minute, second]}]));
+            // localStorage.setItem('tags_game', JSON.stringify([{"tags": debugTricksArray(), "count":counter(e, true), "timer": [minute, second]}]));  // for debug
             window.location.reload()
         }
     })
 }
 
-function counter(cnt) {
-    let count = document.getElementById('count')
+function checkGameOver() {
+    // Функция проверяет на окончание игры
+    // Если собранная матрица === матрице изначальной - игра завершена
+
+    let end_game = document.querySelector('.game_over')
     let input = document.getElementById('reset')
+    let randomArray = JSON.parse(localStorage.getItem("tags_game"))
+
+    if (randomArray[0].tags.join('') === factArrayNumber.join('')) {
+        gameOver = false;
+        formatTime(
+            _minute=randomArray[0].timer[0],
+            _second=randomArray[0].timer[1]
+        )
+        console.log("You win!");
+        end_game.style.display = 'block';
+        input.value = "Еще разок";
+        input.style.backgroundColor = '#4caf50c2';
+        return false;
+    }
+
+    return true;
+}
+
+function updateResult() {
+    // Обновляем результат "Кол-во ходов" и
+    // Отправляем запрос на обработку события по нажатию кнопки
+
+    let countL = document.getElementById('count')
+    let input = document.getElementById('reset')
+    let countStep = JSON.parse(localStorage.getItem("tags_game"))
     
     if (gameOver) {
-        count.innerHTML = `Кол-во ходов: <span style="min-width: 50px;">${cnt}</span>`;
+        countL.innerHTML = `Кол-во ходов: <span style="min-width: 50px;">${countStep[0].count}</span>`;
         reload(input);
     } else {
-        input.value = "Еще разок";
-        input.style.backgroundColor = '#4caf50c2'
         reload(input);
     }
 
 }
 
+function counter(event, reset = false) {
+    // Счетчик для кол-во затраченных ходов;
+    // При перезагрузки страницы счетчик не сбрасывается;
+    // Для сброса счетчика нужно передать переменной "reset" = true;
 
-let factArrayNumber = createTricksArray()
-let randomArray = randomSort(factArrayNumber)
-// let randomArray = factArrayNumber  // for debug
+    let currentStep = JSON.parse(localStorage.getItem("tags_game"));
 
+    if (reset) {
+        currentStep[0].count = 0
+    } else {
+        if (event.target.innerText !== ' ' & event.type === 'click') {
+            currentStep[0].count++
+        }
+    }
 
-createFieldTick(randomArray)
+    return currentStep[0].count
+}
+
+checkGameOver()
+updateResult()
+
+//===========================================================================
+//              Создание массива для дебаг режима                           =
+//===========================================================================
+
+function debugTricksArray() {
+    // После инициализации игрового поля,
+    // Создаем массив с номерами фишек для дебаг режима
+    initField();
+    const numArray = [];
+    for (let i = 0; i < 16; i++) {
+        if (i === 14) {
+             numArray.push(' ');
+        } else if (i === 15) {
+            numArray.push(i);
+        } else {
+            numArray.push(i + 1);
+        }
+    }
+
+    return numArray;
+}

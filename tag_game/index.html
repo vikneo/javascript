@@ -26,23 +26,26 @@
         <div class="container">
             <div style="width: 290px; margin: 0 auto;">
                 <div class="game_field">
-                      <table class="table-bordered" onselectstart="return false" onmousedown="return false">
-    
+                    <table class="table-bordered" onselectstart="return false" onmousedown="return false">
+
                     </table>
                 </div>
-                <div class="statistic">
+                <div class="flex statistic">
                     <div id="count" class="counter">
                         Кол-во ходов: <span style="min-width: 50px;">0</span>
                     </div>
-                    <div class="action">
-                        <input id="reset" type="button" class="button" value="Переиграть">
-                    </div>
+                    <div class="timer"></div>
+                </div>
+                <div class="action">
+                    <input id="reset" type="button" class="button" value="Переиграть">
                 </div>
             </div>
         </div>
     </div>
 
-
+    <div class="game_over">
+        <h1>Игра завершена</h1>
+    </div>
 
     <script src="../static/js/bootstrap.bundle.min.js"></script>
     <script src="static/js/main.js"></script>

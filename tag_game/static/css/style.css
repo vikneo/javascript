@@ -1,3 +1,45 @@
+@media (min-width: 375px) {
+    .game_over {
+        left: 14% !important;
+    }
+}
+
+@media (min-width: 425px) {
+    .game_over {
+        left: 18% !important;
+    }
+}
+
+@media (min-width: 728px) {
+    .game_over {
+        left: 30% !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .game_over {
+        left: 34% !important;
+        padding: 6px 15px !important;
+    }
+}
+
+@media (min-width: 1440px) {
+    .game_over {
+        top: 28% !important;
+        left: 40% !important;
+        padding: 2px 15px !important;
+    }
+}
+
+/* @media (min-width: 1440px) {
+    .game_over {
+        top: 28% !important;
+        left: 38% !important;
+        padding: 2px 15px !important;
+    }
+} */
+
+
 td {
     border-radius: 13px;
 }
@@ -13,7 +55,7 @@ td {
 
 .game_field {
     width: 100%;
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
     border: 10px solid #25955e;
     border-radius: 5px;
     background-color: #ffffff;
@@ -33,18 +75,27 @@ td {
     background-color: #fbb96b;
     border: 6px solid #f3f3f3 !important;
 }
-/* td:hover, */
-/* .triks_elem:hover {
-    background-color: #ee9528 !important;
-} */
 
 .statistic {
-    margin-left: 25px;
+    height: 54px;
+    align-items: center;
+}
+
+.game_over {
+    display: none;
+    position: absolute;
+    top: 33%;
+    left: 9%;
+    border: 3px solid #f27272;
+    border-radius: 17px;
+    background-color: #b7c5d2;
+    padding: 6px 25px;
 }
 
 .counter {
     width: 250px;
-    margin-bottom: 35px;
+    padding: 0 14px;
+    /* margin-bottom: 35px; */
     font-size: 20px;
     font-weight: 700;
 }
@@ -61,4 +112,11 @@ td {
 .button:hover {
     margin: 0;
     box-shadow: 8px 9px 6px  #a29292;
+}
+
+.time-block {
+    max-width: 70px;
+    padding: 3px 6px;
+    font-size: 19px;
+    color: #9d2525;
 }
