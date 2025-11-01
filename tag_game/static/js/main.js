@@ -20,7 +20,8 @@ function clockTimer(reset = false) {
 
     let delta = Date.now() - start;
     let seconds = Math.floor(delta / 1000);
-
+    // Доделать
+    // Подхватить время с хранилища и продолжиьт отсчет
     if (reset) {
         minute = 0;
         second = 0;
@@ -159,7 +160,6 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
 
     let elemArr = [], numElem;
     let setTagsArray = JSON.parse(localStorage.getItem("tags_game"))
-    setInterval(clockTimer, 1000)
     
     try {
         for (let i = 0; i < setTagsArray[0].tags.length; i++) {
@@ -178,8 +178,9 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
         }
         
         let target = e.target;
-
+        
         if (checkGameOver()) {
+            setInterval(clockTimer, 0)
             if(elemArr.includes(target)) {
                 let buffer = target.innerHTML;
                 let numb = [];
