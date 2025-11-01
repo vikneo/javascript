@@ -1,13 +1,13 @@
 let cnt = 0;
 let gameOver = true;
-
-
 let factArrayNumber = createTricksArray()
 
+
+// Сохраняем новый перемешанный массив с номерами в LocalStorage();
 if (!localStorage.getItem('tags_game')) {
-    localStorage.setItem('tags_game', JSON.stringify(randomSort(factArrayNumber)))
+    localStorage.setItem('tags_game', JSON.stringify([{"tags": randomSort(factArrayNumber), "count":cnt}]));
     // localStorage.setItem('tags_game', JSON.stringify(factArrayNumber)) // for debug
-    let randoTags = JSON.parse(localStorage.getItem("tags_game"))
+    let randoTags = JSON.parse(localStorage.getItem("tags_game"));
     createFieldTick(randoTags);
 } else {
     createFieldTick(JSON.parse(localStorage.getItem('tags_game')))
@@ -25,13 +25,13 @@ function initField() {
 function createTricksArray() {
     // После инициализации игрового поля,
     // Создаем массив с номерами фишек для игры
+
     initField();
     const numArray = [];
+
     for (let i = 0; i < 16; i++) {
-        if ( i === 14) {
+        if ( i === 15) {
              numArray.push(' ');
-        } else if (i === 15) {
-            numArray.push(i);
         } else {
             numArray.push(i + 1);
         }
@@ -44,7 +44,7 @@ function createFieldTick(ticks_array) {
     // Создаем поля для игровых фишек и устанавливаем
     // значения из массива с номерами.
 
-    let ticksArray = ticks_array;
+    let ticksArray = ticks_array[0].tags;
     let border = document.querySelector('.table-bordered');
     let tr;
     for (let i = 0; i < ticksArray.length; i++) {
@@ -75,18 +75,17 @@ function createFieldTick(ticks_array) {
 function randomSort(numArray) {
     // Создаем массив с рандомными не повторяющимися индексами от 1 до 15;
     // Копируем елемент по индексу из массива createTricksArray() - 1 в новый массив;
-    // Сохраняем новый перемешанный массив с номерами в LocalStorage;
 
     let curArray = [];
     let newArray = [];
-    let cnt = 0
+    let cntLocal = 0
 
-    while (cnt !== 16){
+    while (cntLocal !== 16){
         let num = Math.ceil(Math.random() * 16)
         
         if (curArray.indexOf(num) === -1) {
             curArray.push(num)
-            cnt++;
+            cntLocal++;
         }
     }
 
@@ -94,7 +93,6 @@ function randomSort(numArray) {
         let num = numArray[curArray[i] - 1]
         newArray.push(num)
     }
-    
 
     return newArray
 }
@@ -104,13 +102,18 @@ function randomSort(numArray) {
 // =======================================================
 
 document.querySelector('.table-bordered').addEventListener('click', function(e) {
+    // Обработчик события "click" при нажатии ЛКМ только на поле с цифрой;
+    // В цикле происходит поиск всех соседей с пустым полем;
+    // При клике по цифре, элемент с цифрой меняется местами с пустым полем;
+    // Новый массив объектов обновляется в LocalStorage();
+
     let elemArr = [], numElem;
     let setTagsArray = JSON.parse(localStorage.getItem("tags_game"))
     
     try {
-        for (let i = 0; i < setTagsArray.length; i++) {
-            document.getElementById(i).innerHTML = setTagsArray[i]
-            if (setTagsArray[i] == ' ') {
+        for (let i = 0; i < setTagsArray[0].tags.length; i++) {
+            document.getElementById(i).innerHTML = setTagsArray[0].tags[i]
+            if (setTagsArray[0].tags[i] == ' ') {
                 numElem = document.getElementById(i);
                 if (document.getElementById(i - 1) && i !== 4 && i !== 8 && i !== 12)
                     elemArr.push(document.getElementById(i - 1));
@@ -125,27 +128,26 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
         
         let target = e.target;
         
-        if(elemArr.includes(target)) {
-            let buffer = target.innerHTML;
-            setTagsArray.indexOf(+target.innerHTML);
-            target.innerHTML = ' '
-            target.style.backgroundColor = '#bbb2b2'
-            numElem.innerHTML = buffer;
-            numElem.style.backgroundColor = '#fbb96b'
-            
-            if (target.innerText !== ' ') {
-                cnt++
-                counter(cnt)
+        if (checkGameOver()) {
+            if(elemArr.includes(target)) {
+                let buffer = target.innerHTML;
+                let numb = [];
+                let step = counter(e)
+    
+                setTagsArray[0].tags.indexOf(+target.innerHTML);
+                target.innerHTML = ' '
+                target.style.backgroundColor = '#bbb2b2'
+                numElem.innerHTML = buffer;
+                numElem.style.backgroundColor = '#fbb96b'
+    
+                for(let i = 0; i < setTagsArray[0].tags.length; i++){
+                    numb.push(Number(document.getElementById(i.toString()).innerHTML));
+                }
+    
+                numb[numb.indexOf(0)] = ' ';
+                localStorage.setItem('tags_game', JSON.stringify([{"tags": numb, "count":step}]))
+                updateResult()
             }
-            
-            let numb = [];
-            for(let i = 0; i < setTagsArray.length; i++){
-                numb.push(Number(document.getElementById(i.toString()).innerHTML));
-            }
-
-            numb[numb.indexOf(0)] = ' ';
-            localStorage.setItem('tags_game', JSON.stringify(numb))
-            checkGameOver()
         }
     }
     catch (error) {
@@ -154,9 +156,11 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
 })
 
 function reload(button) {
+    // Обработчик собития "click" при нажатии кноки "Переиграть" или "Еще разок"
+
     button.addEventListener('click', function(e) {
         if (e.type === 'click') {
-            localStorage.setItem('tags_game', JSON.stringify(randomSort(factArrayNumber)));
+            localStorage.setItem('tags_game', JSON.stringify([{"tags": randomSort(factArrayNumber), "count":counter(e, true)}]));
             // localStorage.setItem('tags_game', JSON.stringify(factArrayNumber)) // for debug
             window.location.reload()
         }
@@ -171,7 +175,7 @@ function checkGameOver() {
     let input = document.getElementById('reset')
     let randomArray = JSON.parse(localStorage.getItem("tags_game"))
 
-    if (randomArray.join('') === debugTricksArray().join('')) {
+    if (randomArray[0].tags.join('') === factArrayNumber.join('')) {
         gameOver = false;
         console.log("You win!");
         end_game.style.display = 'block';
@@ -183,12 +187,16 @@ function checkGameOver() {
     return true;
 }
 
-function counter(cnt) {
-    let count = document.getElementById('count')
+function updateResult() {
+    // Обновляем результат "Кол-во ходов" и
+    // Отправляем запрос на обработку события по нажатию кнопки
+
+    let countL = document.getElementById('count')
     let input = document.getElementById('reset')
+    let countStep = JSON.parse(localStorage.getItem("tags_game"))
     
     if (gameOver) {
-        count.innerHTML = `Кол-во ходов: <span style="min-width: 50px;">${cnt}</span>`;
+        countL.innerHTML = `Кол-во ходов: <span style="min-width: 50px;">${countStep[0].count}</span>`;
         reload(input);
     } else {
         reload(input);
@@ -196,8 +204,26 @@ function counter(cnt) {
 
 }
 
+function counter(event, reset = false) {
+    // Счетчик для кол-во затраченных ходов;
+    // При перезагрузки страницы счетчик не сбрасывается;
+    // Для сброса счетчика нужно передать переменной "reset" = true;
+
+    let currentStep = JSON.parse(localStorage.getItem("tags_game"));
+
+    if (reset) {
+        currentStep[0].count = 0
+    } else {
+        if (event.target.innerText !== ' ' & event.type === 'click') {
+            currentStep[0].count++
+        }
+    }
+
+    return currentStep[0].count
+}
+
 checkGameOver()
-counter(cnt)
+updateResult()
 
 //===========================================================================
 //              Создание массива для дебаг режима                           =
