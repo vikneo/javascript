@@ -20,46 +20,40 @@ function clockTimer(reset = false) {
 
     let delta = Date.now() - start;
     let seconds = Math.floor(delta / 1000);
-    // Доделать
-    // Подхватить время с хранилища и продолжиьт отсчет
-    if (reset) {
-        minute = 0;
-        second = 0;
-    }
 
     second = seconds
     second = seconds % 60
     minute = Math.floor(seconds / 60)
 
-    formatTime()
+    formatTime(_minute=minute, _seconds=second)
 }
 
-function formatTime() {
+function formatTime(_minute, _second) {
     
-    if (minute < 10) {
-        minute = `0${minute}`
-        if (`${minute}`.length > 2) {
-            minute = `${minute[minute.length - 2]}${minute[minute.length - 1]}`
+    if (_minute < 10) {
+        _minute = `0${_minute}`
+        if (`${_minute}`.length > 2) {
+            _minute = `${_minute[_minute.length - 2]}${_minute[_minute.length - 1]}`
         }
     }
 
-    if (second < 10) {
-        second = `0${second}`
-        if (`${second}`.length > 2) {
-            second = `${second[second.length - 2]}${second[second.length - 1]}`
+    if (_second < 10) {
+        _second = `0${_second}`
+        if (`${_second}`.length > 2) {
+            _second = `${_second[_second.length - 2]}${_second[_second.length - 1]}`
         }
     }
     let newData = JSON.parse(localStorage.getItem("tags_game"))
     let timerS = newData[0].timer
-    timerS[0] = minute
-    timerS[1] = second
+    timerS[0] = _minute
+    timerS[1] = _second
 
     localStorage.setItem("tags_game", JSON.stringify([{"tags": newData[0].tags, "count": newData[0].count, "timer": timerS}]))
 
     let block_timer = document.querySelector(".timer")
     block_timer.innerHTML = `
     <div class="clock">
-        <div class="time-block" title="Время игры">${minute}:${second}</div>
+        <div class="time-block" title="Время игры">${_minute}:${_second}</div>
     </div>
     `
 }
@@ -178,9 +172,10 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
         }
         
         let target = e.target;
+        let timerId;
         
-        if (checkGameOver()) {
-            setInterval(clockTimer, 0)
+        if (gameOver) {
+            timerId = setInterval(clockTimer(), 50)
             if(elemArr.includes(target)) {
                 let buffer = target.innerHTML;
                 let numb = [];
@@ -200,6 +195,9 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
                 localStorage.setItem('tags_game', JSON.stringify([{"tags": numb, "count":step, "timer": [minute, second]}]))
                 updateResult()
             }
+            checkGameOver()
+        } else {
+            clearInterval(timerId)
         }
     }
     catch (error) {
@@ -213,7 +211,7 @@ function reload(button) {
     button.addEventListener('click', function(e) {
         if (e.type === 'click') {
             localStorage.setItem('tags_game', JSON.stringify([{"tags": randomSort(factArrayNumber), "count":counter(e, true), "timer": [minute, second]}]));
-            // localStorage.setItem('tags_game', JSON.stringify(factArrayNumber)) // for debug
+            // localStorage.setItem('tags_game', JSON.stringify([{"tags": debugTricksArray(), "count":counter(e, true), "timer": [minute, second]}]));  // for debug
             window.location.reload()
         }
     })
@@ -229,6 +227,10 @@ function checkGameOver() {
 
     if (randomArray[0].tags.join('') === factArrayNumber.join('')) {
         gameOver = false;
+        formatTime(
+            _minute=randomArray[0].timer[0],
+            _second=randomArray[0].timer[1]
+        )
         console.log("You win!");
         end_game.style.display = 'block';
         input.value = "Еще разок";
@@ -287,8 +289,10 @@ function debugTricksArray() {
     initField();
     const numArray = [];
     for (let i = 0; i < 16; i++) {
-        if ( i === 15) {
+        if (i === 14) {
              numArray.push(' ');
+        } else if (i === 15) {
+            numArray.push(i);
         } else {
             numArray.push(i + 1);
         }
