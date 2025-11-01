@@ -1,47 +1,3 @@
-td {
-    border-radius: 13px;
-}
-
-.tag_title {
-    margin-bottom: 25px;
-    justify-content: center;
-}
-
-.game_block {
-    justify-content: center;
-}
-
-.game_field {
-    width: 100%;
-    margin-bottom: 25px;
-    border: 10px solid #25955e;
-    border-radius: 5px;
-    background-color: #ffffff;
-}
-
-.table-bordered {
-    width: 100%;
-    height: 100%;
-}
-
-.triks_elem {
-    padding: 13px;
-    text-align: center;
-    font-size: x-large;
-    font-weight: 800;
-    color: #9d2525;
-    background-color: #fbb96b;
-    border: 6px solid #f3f3f3 !important;
-}
-/* td:hover, */
-/* .triks_elem:hover {
-    background-color: #ee9528 !important;
-} */
-
-.statistic {
-    margin-left: 25px;
-}
-
 @media (min-width: 375px) {
     .game_over {
         left: 14% !important;
@@ -84,6 +40,46 @@ td {
 } */
 
 
+td {
+    border-radius: 13px;
+}
+
+.tag_title {
+    margin-bottom: 25px;
+    justify-content: center;
+}
+
+.game_block {
+    justify-content: center;
+}
+
+.game_field {
+    width: 100%;
+    /* margin-bottom: 25px; */
+    border: 10px solid #25955e;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.table-bordered {
+    width: 100%;
+    height: 100%;
+}
+
+.triks_elem {
+    padding: 13px;
+    text-align: center;
+    font-size: x-large;
+    font-weight: 800;
+    color: #9d2525;
+    background-color: #fbb96b;
+    border: 6px solid #f3f3f3 !important;
+}
+
+.statistic {
+    align-items: center;
+}
+
 .game_over {
     display: none;
     position: absolute;
@@ -97,7 +93,8 @@ td {
 
 .counter {
     width: 250px;
-    margin-bottom: 35px;
+    padding: 0 14px;
+    /* margin-bottom: 35px; */
     font-size: 20px;
     font-weight: 700;
 }
@@ -114,4 +111,11 @@ td {
 .button:hover {
     margin: 0;
     box-shadow: 8px 9px 6px  #a29292;
+}
+
+.time-block {
+    max-width: 70px;
+    padding: 3px 6px;
+    font-size: 19px;
+    color: #9d2525;
 }

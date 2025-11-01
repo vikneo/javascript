@@ -1,16 +1,66 @@
+let start = Date.now()
 let cnt = 0;
 let gameOver = true;
 let factArrayNumber = createTricksArray()
 
+let minute = 0
+let second = 0
 
 // Сохраняем новый перемешанный массив с номерами в LocalStorage();
 if (!localStorage.getItem('tags_game')) {
-    localStorage.setItem('tags_game', JSON.stringify([{"tags": randomSort(factArrayNumber), "count":cnt}]));
+    localStorage.setItem('tags_game', JSON.stringify([{"tags": randomSort(factArrayNumber), "count":cnt, "timer": [minute, second]}]));
     // localStorage.setItem('tags_game', JSON.stringify(factArrayNumber)) // for debug
     let randoTags = JSON.parse(localStorage.getItem("tags_game"));
     createFieldTick(randoTags);
 } else {
     createFieldTick(JSON.parse(localStorage.getItem('tags_game')))
+}
+
+function clockTimer(reset = false) {
+
+    let delta = Date.now() - start;
+    let seconds = Math.floor(delta / 1000);
+
+    if (reset) {
+        minute = 0;
+        second = 0;
+    }
+
+    second = seconds
+    second = seconds % 60
+    minute = Math.floor(seconds / 60)
+
+    formatTime()
+}
+
+function formatTime() {
+    
+    if (minute < 10) {
+        minute = `0${minute}`
+        if (`${minute}`.length > 2) {
+            minute = `${minute[minute.length - 2]}${minute[minute.length - 1]}`
+        }
+    }
+
+    if (second < 10) {
+        second = `0${second}`
+        if (`${second}`.length > 2) {
+            second = `${second[second.length - 2]}${second[second.length - 1]}`
+        }
+    }
+    let newData = JSON.parse(localStorage.getItem("tags_game"))
+    let timerS = newData[0].timer
+    timerS[0] = minute
+    timerS[1] = second
+
+    localStorage.setItem("tags_game", JSON.stringify([{"tags": newData[0].tags, "count": newData[0].count, "timer": timerS}]))
+
+    let block_timer = document.querySelector(".timer")
+    block_timer.innerHTML = `
+    <div class="clock">
+        <div class="time-block">${minute}:${second}</div>
+    </div>
+    `
 }
 
 function initField() {
@@ -109,6 +159,7 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
 
     let elemArr = [], numElem;
     let setTagsArray = JSON.parse(localStorage.getItem("tags_game"))
+    setInterval(clockTimer, 1000)
     
     try {
         for (let i = 0; i < setTagsArray[0].tags.length; i++) {
@@ -127,7 +178,7 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
         }
         
         let target = e.target;
-        
+
         if (checkGameOver()) {
             if(elemArr.includes(target)) {
                 let buffer = target.innerHTML;
@@ -145,7 +196,7 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
                 }
     
                 numb[numb.indexOf(0)] = ' ';
-                localStorage.setItem('tags_game', JSON.stringify([{"tags": numb, "count":step}]))
+                localStorage.setItem('tags_game', JSON.stringify([{"tags": numb, "count":step, "timer": [minute, second]}]))
                 updateResult()
             }
         }
@@ -160,7 +211,7 @@ function reload(button) {
 
     button.addEventListener('click', function(e) {
         if (e.type === 'click') {
-            localStorage.setItem('tags_game', JSON.stringify([{"tags": randomSort(factArrayNumber), "count":counter(e, true)}]));
+            localStorage.setItem('tags_game', JSON.stringify([{"tags": randomSort(factArrayNumber), "count":counter(e, true), "timer": [minute, second]}]));
             // localStorage.setItem('tags_game', JSON.stringify(factArrayNumber)) // for debug
             window.location.reload()
         }
