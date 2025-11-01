@@ -172,10 +172,8 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
         }
         
         let target = e.target;
-        let timerId;
         
         if (gameOver) {
-            timerId = setInterval(clockTimer(), 50)
             if(elemArr.includes(target)) {
                 let buffer = target.innerHTML;
                 let numb = [];
@@ -196,8 +194,6 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
                 updateResult()
             }
             checkGameOver()
-        } else {
-            clearInterval(timerId)
         }
     }
     catch (error) {
