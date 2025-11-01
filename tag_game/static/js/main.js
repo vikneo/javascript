@@ -28,8 +28,10 @@ function createTricksArray() {
     initField();
     const numArray = [];
     for (let i = 0; i < 16; i++) {
-        if ( i === 15) {
+        if ( i === 14) {
              numArray.push(' ');
+        } else if (i === 15) {
+            numArray.push(i);
         } else {
             numArray.push(i + 1);
         }
@@ -123,7 +125,7 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
         
         let target = e.target;
         
-        if(elemArr.includes(target) & checkGameOver()) {
+        if(elemArr.includes(target)) {
             let buffer = target.innerHTML;
             setTagsArray.indexOf(+target.innerHTML);
             target.innerHTML = ' '
@@ -143,6 +145,7 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
 
             numb[numb.indexOf(0)] = ' ';
             localStorage.setItem('tags_game', JSON.stringify(numb))
+            checkGameOver()
         }
     }
     catch (error) {
@@ -168,7 +171,7 @@ function checkGameOver() {
     let input = document.getElementById('reset')
     let randomArray = JSON.parse(localStorage.getItem("tags_game"))
 
-    if (randomArray.join('') === factArrayNumber.join('')) {
+    if (randomArray.join('') === debugTricksArray().join('')) {
         gameOver = false;
         console.log("You win!");
         end_game.style.display = 'block';
@@ -195,3 +198,23 @@ function counter(cnt) {
 
 checkGameOver()
 counter(cnt)
+
+//===========================================================================
+//              Создание массива для дебаг режима                           =
+//===========================================================================
+
+function debugTricksArray() {
+    // После инициализации игрового поля,
+    // Создаем массив с номерами фишек для дебаг режима
+    initField();
+    const numArray = [];
+    for (let i = 0; i < 16; i++) {
+        if ( i === 15) {
+             numArray.push(' ');
+        } else {
+            numArray.push(i + 1);
+        }
+    }
+
+    return numArray;
+}
