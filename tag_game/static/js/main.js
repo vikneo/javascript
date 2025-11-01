@@ -59,7 +59,7 @@ function formatTime() {
     let block_timer = document.querySelector(".timer")
     block_timer.innerHTML = `
     <div class="clock">
-        <div class="time-block">${minute}:${second}</div>
+        <div class="time-block" title="Время игры">${minute}:${second}</div>
     </div>
     `
 }
