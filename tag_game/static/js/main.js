@@ -1,9 +1,17 @@
 let cnt = 0;
 let gameOver = true;
 
+
 let factArrayNumber = createTricksArray()
-let randomArray = randomSort(factArrayNumber)
-// let randomArray = factArrayNumber // for debug
+
+if (!localStorage.getItem('tags_game')) {
+    localStorage.setItem('tags_game', JSON.stringify(randomSort(factArrayNumber)))
+    // localStorage.setItem('tags_game', JSON.stringify(factArrayNumber)) // for debug
+    let randoTags = JSON.parse(localStorage.getItem("tags_game"))
+    createFieldTick(randoTags);
+} else {
+    createFieldTick(JSON.parse(localStorage.getItem('tags_game')))
+}
 
 function initField() {
     // Инициализируем игровое поле устанавливаем высоту равной ширине
@@ -21,7 +29,7 @@ function createTricksArray() {
     const numArray = [];
     for (let i = 0; i < 16; i++) {
         if ( i === 15) {
-             numArray.push('');
+             numArray.push(' ');
         } else {
             numArray.push(i + 1);
         }
@@ -51,7 +59,7 @@ function createFieldTick(ticks_array) {
         if (num > 0 && num < 10) {
             td.innerHTML = `  ${num}`;
         }
-        else if (num === '') {
+        else if (num === ' ') {
             // td.innerHTML = ''
             td.style.backgroundColor = '#bbb2b2'
         } else {
@@ -95,11 +103,12 @@ function randomSort(numArray) {
 
 document.querySelector('.table-bordered').addEventListener('click', function(e) {
     let elemArr = [], numElem;
+    let setTagsArray = JSON.parse(localStorage.getItem("tags_game"))
     
     try {
-        for (let i = 0; i < randomArray.length; i++) {
-            document.getElementById(i).innerHTML = randomArray[i]
-            if (randomArray[i] == '') {
+        for (let i = 0; i < setTagsArray.length; i++) {
+            document.getElementById(i).innerHTML = setTagsArray[i]
+            if (setTagsArray[i] == ' ') {
                 numElem = document.getElementById(i);
                 if (document.getElementById(i - 1) && i !== 4 && i !== 8 && i !== 12)
                     elemArr.push(document.getElementById(i - 1));
@@ -112,33 +121,28 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
             }
         }
         
-        let id = +numElem.id
         let target = e.target;
         
-        if (checkGameOver()) {
-            if (target.innerText !== '') {
+        if(elemArr.includes(target) & checkGameOver()) {
+            let buffer = target.innerHTML;
+            setTagsArray.indexOf(+target.innerHTML);
+            target.innerHTML = ' '
+            target.style.backgroundColor = '#bbb2b2'
+            numElem.innerHTML = buffer;
+            numElem.style.backgroundColor = '#fbb96b'
+            
+            if (target.innerText !== ' ') {
                 cnt++
                 counter(cnt)
             }
-
-            if(elemArr.includes(target)) {
-                let buffer = target.innerHTML;
-                randomArray.indexOf(+target.innerHTML);
-                target.innerHTML = ''
-                target.style.backgroundColor = '#bbb2b2'
-                numElem.innerHTML = buffer;
-                numElem.style.backgroundColor = '#fbb96b'
-                
-                let numb = [];
-                for(let i = 0; i < randomArray.length; i++){
-                    numb.push(Number(document.getElementById(i.toString()).innerHTML));
-                    // Добавить и обновить localStorage()
-                }
-                numb[numb.indexOf(0)] = '';
-                randomArray = numb;
+            
+            let numb = [];
+            for(let i = 0; i < setTagsArray.length; i++){
+                numb.push(Number(document.getElementById(i.toString()).innerHTML));
             }
-        } else {
-            counter(cnt)
+
+            numb[numb.indexOf(0)] = ' ';
+            localStorage.setItem('tags_game', JSON.stringify(numb))
         }
     }
     catch (error) {
@@ -148,25 +152,29 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
 
 function reload(button) {
     button.addEventListener('click', function(e) {
-        if (e.target.value) {
+        if (e.type === 'click') {
+            localStorage.setItem('tags_game', JSON.stringify(randomSort(factArrayNumber)));
+            // localStorage.setItem('tags_game', JSON.stringify(factArrayNumber)) // for debug
             window.location.reload()
         }
     })
 }
 
 function checkGameOver() {
-    let cnt = 0;
-    for (let i = 0; i < factArrayNumber.length; i++) {
-        if (randomArray[i] === factArrayNumber[i]) {
-            cnt++
-        }
-    }
+    // Функция проверяет на окончание игры
+    // Если собранная матрица === матрице изначальной - игра завершена
 
-    if(cnt === factArrayNumber.length) {
+    let end_game = document.querySelector('.game_over')
+    let input = document.getElementById('reset')
+    let randomArray = JSON.parse(localStorage.getItem("tags_game"))
+
+    if (randomArray.join('') === factArrayNumber.join('')) {
         gameOver = false;
-        console.log("You win!")
-        return false
-
+        console.log("You win!");
+        end_game.style.display = 'block';
+        input.value = "Еще разок";
+        input.style.backgroundColor = '#4caf50c2';
+        return false;
     }
 
     return true;
@@ -180,11 +188,10 @@ function counter(cnt) {
         count.innerHTML = `Кол-во ходов: <span style="min-width: 50px;">${cnt}</span>`;
         reload(input);
     } else {
-        input.value = "Еще разок";
-        input.style.backgroundColor = '#4caf50c2'
         reload(input);
     }
 
 }
 
-createFieldTick(randomArray)
+checkGameOver()
+counter(cnt)
