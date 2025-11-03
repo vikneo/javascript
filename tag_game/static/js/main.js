@@ -22,14 +22,13 @@ document.getElementById('reset').addEventListener('click', function(e) {
 
     if (startGame.value.toLowerCase() === 'начать игру') {
         gameOver = true;
-        timeClockId = setInterval(clockTimer, 1000);
+        timeClockId = setInterval(clockTimer, 10);
         startGame.value = 'Переиграть';
-        let localTime = updateResult()
-        formatTime(localTime[0], localTime[1])
+        updateResult()
     } else if (startGame.value.toLowerCase() === 'переиграть') {
         reload(startGame);
         clearInterval(timeClockId);
-        timeClockId = setInterval(clockTimer, 1000);
+        timeClockId = setInterval(clockTimer, 10);
     } else {
         reload(startGame)
     }
@@ -40,10 +39,7 @@ function clockTimer(reset = false) {
 
     let delta = Date.now() - start;
     let seconds = Math.floor(delta / 1000);
-    // let clockTimer = JSON.parse(localStorage.getItem('tags_game'))[0].timer
-    // let seconds = clockTimer[0] * 60 + clockTimer[1]
 
-    // seconds++
     second = seconds % 60
     minute = Math.floor(seconds / 60)
 
