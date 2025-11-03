@@ -1,6 +1,7 @@
 let start = Date.now()
 let cnt = 0;
-let gameOver = true;
+let gameOver = false;
+let timeClockId;
 let factArrayNumber = createTricksArray()
 
 let minute = 0
@@ -9,19 +10,40 @@ let second = 0
 // Сохраняем новый перемешанный массив с номерами в LocalStorage();
 if (!localStorage.getItem('tags_game')) {
     localStorage.setItem('tags_game', JSON.stringify([{"tags": randomSort(factArrayNumber), "count":cnt, "timer": [minute, second]}]));
-    // localStorage.setItem('tags_game', JSON.stringify(factArrayNumber)) // for debug
+    // localStorage.setItem('tags_game', JSON.stringify([{"tags": debugTricksArray(), "count":cnt, "timer": [minute, second]}]));  // for debug
     let randoTags = JSON.parse(localStorage.getItem("tags_game"));
     createFieldTick(randoTags);
 } else {
     createFieldTick(JSON.parse(localStorage.getItem('tags_game')))
 }
 
+document.getElementById('reset').addEventListener('click', function(e) {
+    let startGame = e.target
+
+    if (startGame.value.toLowerCase() === 'начать игру') {
+        gameOver = true;
+        timeClockId = setInterval(clockTimer, 1000);
+        startGame.value = 'Переиграть';
+        let localTime = updateResult()
+        formatTime(localTime[0], localTime[1])
+    } else if (startGame.value.toLowerCase() === 'переиграть') {
+        reload(startGame);
+        clearInterval(timeClockId);
+        timeClockId = setInterval(clockTimer, 1000);
+    } else {
+        reload(startGame)
+    }
+
+})
+
 function clockTimer(reset = false) {
 
     let delta = Date.now() - start;
     let seconds = Math.floor(delta / 1000);
+    // let clockTimer = JSON.parse(localStorage.getItem('tags_game'))[0].timer
+    // let seconds = clockTimer[0] * 60 + clockTimer[1]
 
-    second = seconds
+    // seconds++
     second = seconds % 60
     minute = Math.floor(seconds / 60)
 
@@ -204,13 +226,11 @@ document.querySelector('.table-bordered').addEventListener('click', function(e) 
 function reload(button) {
     // Обработчик собития "click" при нажатии кноки "Переиграть" или "Еще разок"
 
-    button.addEventListener('click', function(e) {
-        if (e.type === 'click') {
-            localStorage.setItem('tags_game', JSON.stringify([{"tags": randomSort(factArrayNumber), "count":counter(e, true), "timer": [minute, second]}]));
-            // localStorage.setItem('tags_game', JSON.stringify([{"tags": debugTricksArray(), "count":counter(e, true), "timer": [minute, second]}]));  // for debug
-            window.location.reload()
-        }
-    })
+    if (button.value.toLowerCase() === 'переиграть' || (!gameOver & button.value.toLowerCase() === 'еще разок')) {
+        localStorage.setItem('tags_game', JSON.stringify([{"tags": randomSort(factArrayNumber), "count":counter(button, true), "timer": [minute, second]}]));
+        // localStorage.setItem('tags_game', JSON.stringify([{"tags": debugTricksArray(), "count":counter(button, true), "timer": [minute, second]}]));  // for debug
+        window.location.reload()
+    }
 }
 
 function checkGameOver() {
@@ -229,6 +249,7 @@ function checkGameOver() {
         )
         console.log("You win!");
         end_game.style.display = 'block';
+        clearInterval(timeClockId)
         input.value = "Еще разок";
         input.style.backgroundColor = '#4caf50c2';
         return false;
@@ -242,16 +263,12 @@ function updateResult() {
     // Отправляем запрос на обработку события по нажатию кнопки
 
     let countL = document.getElementById('count')
-    let input = document.getElementById('reset')
     let countStep = JSON.parse(localStorage.getItem("tags_game"))
     
     if (gameOver) {
         countL.innerHTML = `Кол-во ходов: <span style="min-width: 50px;">${countStep[0].count}</span>`;
-        reload(input);
-    } else {
-        reload(input);
     }
-
+    return countStep[0].timer
 }
 
 function counter(event, reset = false) {
