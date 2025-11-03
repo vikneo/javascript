@@ -155,7 +155,7 @@ document.querySelector('button.add_new').addEventListener('click', function(e) {
 
         let goods = JSON.parse(localStorage.getItem('goods'))
         goods.push({
-            "id": goods.length,
+            "id": goods.length + 1,
             "name": name,
             "price": price,
             "count": count,
