@@ -12,7 +12,7 @@ for (let i = 0; i < word.length; i++) {
     let div = document.createElement("div");
     div.id = i + 1;
     div.className = 'element';
-    // div.innerHTML = "&#x1F637;" //word[i]
+    div.innerHTML = "&#x1F637;" //word[i]
     grid.appendChild(div);
 }
 
