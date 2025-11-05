@@ -5,3 +5,14 @@ let word = random_word.split("")
 
 console.log(word)
 
+let grid = document.querySelector(".grid")
+grid.style.gridTemplateColumns = `repeat(${word.length}, 1fr)`;
+grid.style.color = `blue`;
+
+for (let i = 0; i < word.length; i++) {
+    let div = document.createElement("div")
+    div.className = 'element'
+    div.innerHTML = "&ast;" //word[i]
+    grid.appendChild(div)
+}
+console.log(grid)

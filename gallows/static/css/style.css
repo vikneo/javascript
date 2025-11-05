@@ -5,10 +5,7 @@
 }
 .grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(1, 1fr);
-    grid-template-areas: "1" "2" "3" "4" "5";
-    background-color: aquamarine;
+    column-gap: 5px;
     justify-content: space-evenly;
     justify-items: center;
 }
@@ -24,4 +21,13 @@
     border: 1px solid green;
     border-radius: 8px;
     background: #e0dddd;
+}
+
+.element {
+    width: 100%;
+    text-align: center;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: gray;
+    font-size: 25px;
 }
