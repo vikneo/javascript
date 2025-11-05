@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="static/css/style.css">
-
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/css/style.css">
+        <link rel="stylesheet" href="static/css/style.css">
+        
     <title>Игра Виселица</title>
 </head>
 
@@ -16,18 +16,28 @@
         <ol class="flex">
             <li><a href="../index.html">Главная</a></li>
             <li class="arrow-right">&gt;</li>
-            <li>Игра Виселица</li>
+            <li>Игра Угадай слово</li>
         </ol>
     </div>
     <div class="conteiner">
         <div class="flex tag_title">
-            <h2>Игра &#171;Виселица&#187;</h2>
+            <h2>Игра &#171;Угадай слово&#187;</h2>
+            <em>Старое название игры <strong>Виселица</strong></em>
         </div>
-        <div class="container">
-
+        <div class="container field_game">
+            <div id="caffold" class="caffold_field">
+                <div class="caffold">
+                </div>
+            </div>
+            <div class="grid">
+                <div class="element">1</div>
+                <div class="incorrect">10</div>
+            </div>
         </div>
     </div>
 
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
     <script src="../static/js/bootstrap.bundle.min.js"></script>
     <script src="static/js/main.js"></script>
 </body>
