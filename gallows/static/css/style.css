@@ -5,6 +5,7 @@
 }
 .grid {
     display: grid;
+    width: 100%;
     column-gap: 5px;
     justify-content: space-evenly;
     justify-items: center;
@@ -16,7 +17,7 @@
 .caffold_field {
     max-width: 100%;
     height: 160px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     padding: 18px;
     border: 1px solid green;
     border-radius: 8px;
@@ -36,7 +37,7 @@
     transition: transform 0.8s;
 }
 .input {
-    margin-top: 25px;
+    margin-top: 15px;
 }
 .label-symbol {
     font-size: 20px;
@@ -49,4 +50,18 @@
     border: 1px solid green;
     border-radius: 7px;
     background-color: #d2cfcf;
+}
+.alphabet-field {
+    height: 75px;
+    margin-top: 15px;
+    padding: 1px;
+    /* border: 1px solid;
+    border-radius: 5px; */
+}
+.alphabet {
+    height: 23px;
+    /* border: 1px solid; */
+    width: 23px;
+    text-align: center;
+    font-size: 15px;
 }
