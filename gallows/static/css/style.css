@@ -40,7 +40,7 @@
     background-color: gray;
     font-size: 26px;
     transform-style: preserve-3d;
-    transition: transform 0.8s;
+    transition: transform 1.4s;
 }
 .input {
     margin-top: 15px;

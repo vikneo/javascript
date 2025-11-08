@@ -45,14 +45,20 @@ document.querySelector(".input").addEventListener("input", function(e) {
     let sym = e.target.value;
     let elems = document.querySelectorAll(".element");
     let fieldAlpha = document.querySelectorAll(".alphabet")
+    let openSymbol;
 
     if (sym === "") return;
+    // if (alphabet.indexOf(sym.toUpperCase()) === -1) {
+    //     e.target.value = '';
+    //     return;q
+    // }
     
     fieldAlpha.forEach((symbol) => {
         if (symbol.innerHTML === sym.toUpperCase()) {
-            symbol.style.display = "block";
+            // symbol.style.display = "block";
             symbol.style.backgroundColor = 'grey';
             symbol.style.color = 'white';
+            openSymbol = symbol;
         }
     })
 
@@ -76,6 +82,8 @@ document.querySelector(".input").addEventListener("input", function(e) {
     }, 1000);
 
     if (!flag) {
+        // if (openSymbol.style.display === "block") return;
+        openSymbol.style.display = "block";
         count++;
         console.log("Рисуем виселицу")
         showGallows(count);
@@ -91,53 +99,74 @@ function showGallows(pos) {
     switch (pos) {
         case 1: 
         // рисуем левый столб
-            stylus.strokeRect(100, 40, 2, 110);
+            stylus.fillStyle = "#666262"
+            stylus.fillRect(100, 40, 6, 110);
             break;
         case 2: 
         // рисуем перекладину
-            stylus.strokeRect(100, 40, 70, 2);
+            stylus.strokeRect(106, 41, 66, 2);
+            stylus.strokeStyle = "#666262"
+            stylus.moveTo(104, 66);
+            stylus.lineTo(130, 42);
+            stylus.lineWidth = 3;
+            stylus.stroke();
             break;
         case 3: 
         // рисуем петлю
-            stylus.strokeRect(170, 40, 2, 20);
-            break;
-        case 4: 
-        // рисуем голову
-            stylus.arc(170, 70, 7, 0, Math.PI * 2, true);
-            stylus.fill();
+            stylus.strokeRect(170, 42, 1, 22);
             break;
         case 5: 
-        // рисуем туловище
+        // рисуем голову
             stylus.beginPath();
-            stylus.moveTo(170, 78);
+            stylus.fillStyle = "#1f1e1eff"
+            stylus.arc(171, 72, 7, 0, Math.PI * 2, true);
+            stylus.fill();
+            stylus.closePath();
+            break;
+        case 6: 
+        // рисуем туловище
+            stylus.moveTo(171, 78);
             stylus.quadraticCurveTo(185, 100, 170, 110);
             stylus.quadraticCurveTo(155, 100, 170, 78);
             stylus.fill();
             break;
-        case 6: 
+        case 7: 
         // рисуем руки
         // левая рука
-            stylus.beginPath();
-            stylus.moveTo(168, 78);
+            stylus.moveTo(168, 79);
             stylus.quadraticCurveTo(160, 88, 152, 108);
-            stylus.quadraticCurveTo(173, 86, 168, 78);
+            stylus.quadraticCurveTo(171, 86, 168, 78);
             stylus.fill();
         // правая рука
-            stylus.beginPath();
-            stylus.moveTo(172, 78);
+            stylus.moveTo(172, 79);
             stylus.quadraticCurveTo(180, 86, 188, 108);
-            stylus.quadraticCurveTo(174, 90, 172, 78);
+            stylus.quadraticCurveTo(173, 90, 172, 78);
             stylus.fill();
             break;
-        case 7: 
-        // рисуем ноги
-            // stylus.arc(170, 70, 7, 0, Math.PI * 2, true);
-            // stylus.fill();
-            break;
         case 8: 
+        // рисуем ноги
+        // левая нога
+            stylus.moveTo(164, 106);
+            stylus.quadraticCurveTo(160, 110, 156, 126);
+            stylus.quadraticCurveTo(173, 112, 164, 106);
+            stylus.fill();
+        // правая нога
+            stylus.moveTo(176, 106);
+            stylus.quadraticCurveTo(181, 110, 186, 126);
+            stylus.quadraticCurveTo(166, 112, 176, 106);
+            stylus.fill();
+            break;
+        case 4: 
         // рисуем стул
-            // stylus.arc(170, 70, 7, 0, Math.PI * 2, true);
-            // stylus.fill();
+            stylus.fillRect(148, 126, 47, 2);
+            stylus.fillRect(155, 128, 2, 20);
+            stylus.fillRect(185, 128, 2, 20);
+            break;
+        case 9:
+        // затираем стул
+            stylus.clearRect(148, 126, 47, 2);
+            stylus.clearRect(155, 128, 2, 20);
+            stylus.clearRect(185, 128, 2, 20);
             break;
     }
 }

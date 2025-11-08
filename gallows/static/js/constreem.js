@@ -42,12 +42,8 @@ function caffold() {
         // ctx.strokeStyle = '#f3f2f2ff';
         // ctx.stroke();
 
-        ctx.beginPath();
-        ctx.moveTo(50, 150);
-        ctx.strokeRect(80, 150, 150, 5);
-        ctx.strokeRect(50, 155, 180, 5);
-        // ctx.lineWidth(5);
-        ctx.strokeStyle = '#7a7373ff';
+        ctx.strokeRect(40, 155, 210, 5);
+        ctx.strokeRect(70, 150, 150, 5);
 
         return ctx
 
