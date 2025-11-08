@@ -37,8 +37,14 @@
             <div class="grid alphabet-field"></div>
             <div class="flex input">
                 <!-- Блок ввода буквы -->
-                 <label class="label-symbol" for="word">Введите букву</label>
-                 <input class="input-symbol" id="word" type="text">
+                <div class="flex input_letter">
+                    <label class="label-symbol" for="word">Введите букву</label>
+                    <input class="input-symbol" id="word" type="text">
+                </div> 
+                <div class="flex input-word" style="display: none;">
+                    <label class="label-symbol" for="word_full">Слово целиком</label>
+                    <input class="input-symbol" id="word_full" type="text">
+                </div>
             </div>
         </div>
     </div>

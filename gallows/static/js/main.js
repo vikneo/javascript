@@ -3,10 +3,14 @@ const alphabetObj = JSON.parse(localStorage.getItem("alphabet"))
 const alphabet = alphabetObj['alphabet']
 // let count = alphabetObj['count']
 let count = 0;
+let youWin = false;
+let gameOver = false;
 
-let random_word = setWords[Math.ceil(Math.random() * setWords.length)];
-// let random_word = "порошок"; // for debug
+// let random_word = setWords[Math.ceil(Math.random() * setWords.length)];
+let random_word = "порошок"; // for debug
 let word = random_word.split("");
+
+let stylus = caffold()
 
 function generateWord() {
 
@@ -46,56 +50,97 @@ document.querySelector(".input").addEventListener("input", function(e) {
     let elems = document.querySelectorAll(".element");
     let fieldAlpha = document.querySelectorAll(".alphabet")
     let openSymbol;
+    let idTimer;
 
-    if (sym === "") return;
-    // if (alphabet.indexOf(sym.toUpperCase()) === -1) {
-    //     e.target.value = '';
-    //     return;q
-    // }
-    
-    fieldAlpha.forEach((symbol) => {
-        if (symbol.innerHTML === sym.toUpperCase()) {
-            // symbol.style.display = "block";
-            symbol.style.backgroundColor = 'grey';
-            symbol.style.color = 'white';
-            openSymbol = symbol;
+    if (idTimer) clearInterval(idTimer);
+
+    if (!gameOver) {
+        if (sym === "") return;
+        if (sym.length > 1) {
+            input.focus()
+            input.selectionStart = input.value.length
+            if (sym.toLowerCase() === word.toLowerCase()) {
+                console.log(`Поздравляем! Вы угодали слово: ${word}`)
+            }
         }
-    })
-
-    for (let i = 0; i < word.length; i++) {
-        if (word[i].toLowerCase() === sym.toLowerCase()) {
-
-            for (let elem of elems) {
-                if (+elem.id == i + 1) {
-                    elem.innerHTML = word[i].toUpperCase();
-                    elem.className = "element back";
-                    elem.style.transform = "rotateX(360deg)";
-                    elem.style.color = "black";
-                    elem.style.backgroundColor = "white";
-                    flag = true
+        if (alphabet.indexOf(sym.toUpperCase()) === -1) {
+            e.target.value = '';
+            return;
+        }
+        
+        fieldAlpha.forEach((symbol) => {
+            if (symbol.innerHTML === sym.toUpperCase()) {
+                // symbol.style.display = "block";
+                symbol.style.backgroundColor = 'grey';
+                symbol.style.color = 'white';
+                openSymbol = symbol;
+            }
+        })
+    
+        for (let i = 0; i < word.length; i++) {
+            if (word[i].toLowerCase() === sym.toLowerCase()) {
+                for (let elem of elems) {
+                    if (+elem.id == i + 1) {
+                        elem.innerHTML = word[i].toUpperCase();
+                        elem.className = "element back";
+                        elem.style.transform = "rotateX(360deg)";
+                        elem.style.color = "black";
+                        elem.style.backgroundColor = "white";
+                        flag = true
+                    }
                 }
             }
         }
-    }
-    setInterval(() => {
-        e.target.value = ''
-    }, 1000);
+        idTimer = setInterval(() => {
+            e.target.value = ''
+        }, 1000);
 
-    if (!flag) {
-        // if (openSymbol.style.display === "block") return;
-        openSymbol.style.display = "block";
-        count++;
-        console.log("Рисуем виселицу")
-        showGallows(count);
-        localStorage.setItem("alphabet", JSON.stringify({"alphabet": alphabet, "count": count}))
+        CheckGameOver(word, elems);
+        
+        if (!flag) {
+            if (openSymbol.style.display === "block") return;
+            openSymbol.style.display = "block";
+            count++;
+            console.log("Рисуем виселицу")
+            showGallows(count);
+            localStorage.setItem("alphabet", JSON.stringify({"alphabet": alphabet, "count": count}))
+        }
+    } else {
+        console.log(`idTimer = ${idTimer}`);
+        console.log(`You Win = ${youWin}`);
+        console.log(`Game Over = ${gameOver}`);
+        clearInterval(idTimer);
+        if (youWin) {
+            // добавляем аллерт с поздравлением
+        } else {
+            // добавляем аллерт с разочарованием
+        }
     }
 })
 
-let stylus = caffold()
+function CheckGameOver(word, elems) {
+    /*
+    Функция проверяет закончена ли игра и существует ли побеитель
+    */
+    let hiddenWordArray = [];
+    elems.forEach((letter) => {
+        if (/[а-яА-Я]/.test(letter.innerHTML)) {
+            hiddenWordArray.push(letter.innerHTML)
+        }
+    })
+    
+    if (hiddenWordArray.length === word.length) {
+        youWin = true;
+        gameOver = true;
+        return;
+    } else if (count === 9) {
+        gameOver = true;
+        return
+    }
+}
 
 function showGallows(pos) {
     // Рисуем виселицу из не правильно отгаданных букв
-    console.log(count)
     switch (pos) {
         case 1: 
         // рисуем левый столб

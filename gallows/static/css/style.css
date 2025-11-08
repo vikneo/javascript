@@ -44,18 +44,32 @@
 }
 .input {
     margin-top: 15px;
+    flex-direction: column;
 }
 .label-symbol {
-    font-size: 20px;
+    font-size: 17px;
     padding: 5px 10px;
 }
 .input-symbol {
     max-width: 45px;
-    font-size: 25px;
+    font-size: 20px;
     text-align: center;
     border: 1px solid green;
     border-radius: 7px;
     background-color: #d2cfcf;
+}
+.input_letter,
+.input-word {
+    font-size: 20px;
+    justify-content: space-evenly;
+}
+.input_letter {
+    margin-bottom: 10px;
+    padding: 0 6px;
+    justify-content: space-between;
+}
+.input-word > .input-symbol{
+    max-width: 138px;
 }
 .alphabet-field {
     height: 75px;
