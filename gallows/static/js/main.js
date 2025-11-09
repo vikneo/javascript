@@ -54,69 +54,101 @@ document.querySelector(".input").addEventListener("input", function(e) {
 
     if (idTimer) clearInterval(idTimer);
 
-    if (!gameOver) {
-        if (sym === "") return;
-        if (sym.length > 1) {
-            input.focus()
-            input.selectionStart = input.value.length
-            if (sym.toLowerCase() === word.toLowerCase()) {
-                console.log(`Поздравляем! Вы угодали слово: ${word}`)
-            }
+    if (sym === "") return;
+    if (sym.length > 1) {
+        input.focus()
+        input.selectionStart = input.value.length
+        if (sym.toLowerCase() === word.toLowerCase()) {
+            console.log(`Поздравляем! Вы угодали слово: ${word}`)
         }
-        if (alphabet.indexOf(sym.toUpperCase()) === -1) {
-            e.target.value = '';
-            return;
-        }
-        
-        fieldAlpha.forEach((symbol) => {
-            if (symbol.innerHTML === sym.toUpperCase()) {
-                // symbol.style.display = "block";
-                symbol.style.backgroundColor = 'grey';
-                symbol.style.color = 'white';
-                openSymbol = symbol;
-            }
-        })
+    }
+    if (alphabet.indexOf(sym.toUpperCase()) === -1) {
+        e.target.value = '';
+        return;
+    }
     
-        for (let i = 0; i < word.length; i++) {
-            if (word[i].toLowerCase() === sym.toLowerCase()) {
-                for (let elem of elems) {
-                    if (+elem.id == i + 1) {
-                        elem.innerHTML = word[i].toUpperCase();
-                        elem.className = "element back";
-                        elem.style.transform = "rotateX(360deg)";
-                        elem.style.color = "black";
-                        elem.style.backgroundColor = "white";
-                        flag = true
-                    }
+    fieldAlpha.forEach((symbol) => {
+        if (symbol.innerHTML === sym.toUpperCase()) {
+            // symbol.style.display = "block";
+            symbol.style.backgroundColor = 'grey';
+            symbol.style.color = 'white';
+            openSymbol = symbol;
+        }
+    })
+
+    for (let i = 0; i < word.length; i++) {
+        if (word[i].toLowerCase() === sym.toLowerCase()) {
+            for (let elem of elems) {
+                if (+elem.id == i + 1) {
+                    elem.innerHTML = word[i].toUpperCase();
+                    elem.className = "element back";
+                    elem.style.transform = "rotateX(360deg)";
+                    elem.style.color = "black";
+                    elem.style.backgroundColor = "white";
+                    flag = true
                 }
             }
         }
-        idTimer = setInterval(() => {
-            e.target.value = ''
-        }, 1000);
+    }
+    idTimer = setInterval(() => {
+        e.target.value = ''
+        endGame();
+        clearInterval(idTimer)
+    }, 1000);
+    
+    
+    if (!flag) {
+        if (openSymbol.style.display === "block") return;
+        openSymbol.style.display = "block";
+        count++;
+        console.log("Рисуем виселицу")
+        showGallows(count);
+        localStorage.setItem("alphabet", JSON.stringify({"alphabet": alphabet, "count": count}))
+    }
+    CheckGameOver(word, elems);
+})
 
-        CheckGameOver(word, elems);
-        
-        if (!flag) {
-            if (openSymbol.style.display === "block") return;
-            openSymbol.style.display = "block";
-            count++;
-            console.log("Рисуем виселицу")
-            showGallows(count);
-            localStorage.setItem("alphabet", JSON.stringify({"alphabet": alphabet, "count": count}))
-        }
-    } else {
-        console.log(`idTimer = ${idTimer}`);
-        console.log(`You Win = ${youWin}`);
-        console.log(`Game Over = ${gameOver}`);
-        clearInterval(idTimer);
+function endGame() {
+    if (gameOver) {
         if (youWin) {
             // добавляем аллерт с поздравлением
+            Swal.fire({
+                title: "Поздравляем!!!",
+                text: `Вы отгадали слово "${word.join('').toUpperCase()}"`,
+                position: "top",
+                padding: "10px 0 20px",
+                showCancelButton: true,
+                cancelButtonText: "Отмена",
+                showConfirmButton: true,
+                confirmButtonText: "Еще раз с играть?",
+                icon: "success"
+                }).then((result) => {
+                    if (result.value) {
+                        console.log(result);
+                        window.location.reload();
+                    }
+                })
         } else {
             // добавляем аллерт с разочарованием
+            Swal.fire({
+                title: "Вы проиграли.",
+                text: `Вы не смогли отгадать слово "${word.join('').toUpperCase()}"`,
+                position: "top",
+                padding: "10px 0 20px",
+                showCancelButton: true,
+                cancelButtonText: "Отмена",
+                showConfirmButton: true,
+                confirmButtonText: "Еще раз с играть?",
+                icon: "error"
+                }).then((result) => {
+                    if (result.value) {
+                        console.log(result);
+                        window.location.reload();
+                    }
+                })
         }
     }
-})
+}
 
 function CheckGameOver(word, elems) {
     /*
