@@ -6,8 +6,8 @@ let count = 0;
 let youWin = false;
 let gameOver = false;
 
-// let random_word = setWords[Math.ceil(Math.random() * setWords.length)];
-let random_word = "порошок"; // for debug
+let random_word = setWords[Math.ceil(Math.random() * setWords.length)];
+// let random_word = "порошок"; // for debug
 let word = random_word.split("");
 
 let stylus = caffold()
