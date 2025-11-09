@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/css/style.css">
+        <link rel="stylesheet" href="static/css/style.css">
+        
+    <title>Игра Виселица</title>
+</head>
+
+<body>
+    <div class="bread-crumbs conteiner">
+        <ol class="flex">
+            <li><a href="../index.html">Главная</a></li>
+            <li class="arrow-right">&gt;</li>
+            <li>Игра Угадай слово</li>
+        </ol>
+    </div>
+    <div class="conteiner">
+        <div class="flex tag_title">
+            <h2>Игра &#171;Угадай слово&#187;</h2>
+            <em>Старое название игры <strong>Виселица</strong></em>
+        </div>
+        <div class="container field_game">
+            <div id="caffold" class="caffold_field">
+                <canvas id="gallows_field" class="caffold" width="276" height="160">
+                    <!-- Блок отрисовки "виселицы" при не верной букве -->
+                </canvas>
+                <!-- <canvas id="gallows" class="gallows" width="276px" height="30px"></canvas> -->
+            </div>
+            <div class="grid word-block">
+                <!-- Блок генерации слова и сетки -->
+            </div>
+            <div class="grid alphabet-field"></div>
+            <div class="flex input">
+                <!-- Блок ввода буквы -->
+                <div class="flex input_letter">
+                    <label class="label-symbol" for="word">Введите букву</label>
+                    <input class="input-symbol" id="word" type="text">
+                </div> 
+                <div class="flex input-word" style="display: none;">
+                    <label class="label-symbol" for="word_full">Слово целиком</label>
+                    <input class="input-symbol" id="word_full" type="text">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    <script src="../static/js/sweetalert.js"></script>
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/constreem.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+
+</html>

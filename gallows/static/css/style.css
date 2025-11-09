@@ -1,0 +1,87 @@
+.title-block,
+.tag_title {
+    flex-direction: column;
+    align-items: center;;
+}
+.grid {
+    display: grid;
+    width: 100%;
+    column-gap: 5px;
+    justify-content: space-evenly;
+    justify-items: center;
+}
+
+.field_game {
+    max-width: 325px;
+}
+.caffold_field {
+    max-width: 100%;
+    height: 160px;
+    margin-bottom: 20px;
+    /* padding: 18px; */
+    text-align: center;
+}
+
+.caffold,
+.gallows {
+    
+    border: 1px solid green;
+    border-radius: 8px;
+    background: #e0dddd;
+}
+
+.element {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    align-content: center;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: gray;
+    font-size: 26px;
+    transform-style: preserve-3d;
+    transition: transform 1.4s;
+}
+.input {
+    margin-top: 15px;
+    flex-direction: column;
+}
+.label-symbol {
+    font-size: 17px;
+    padding: 5px 10px;
+}
+.input-symbol {
+    max-width: 45px;
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid green;
+    border-radius: 7px;
+    background-color: #d2cfcf;
+}
+.input_letter,
+.input-word {
+    font-size: 20px;
+    justify-content: space-evenly;
+}
+.input_letter {
+    margin-bottom: 10px;
+    padding: 0 6px;
+    justify-content: space-between;
+}
+.input-word > .input-symbol{
+    max-width: 138px;
+}
+.alphabet-field {
+    height: 75px;
+    margin-top: 15px;
+    padding: 1px;
+    /* border: 1px solid;
+    border-radius: 5px; */
+}
+.alphabet {
+    height: 23px;
+    /* border: 1px solid; */
+    width: 23px;
+    text-align: center;
+    font-size: 15px;
+}
