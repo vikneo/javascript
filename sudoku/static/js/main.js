@@ -11,6 +11,9 @@ function generateArrayNumber() {
     }
 }
 
+/**
+ * Создаются поля с числами для игры Судоку
+ */
 function createdFielGame() {
     let box = document.getElementById("sudoku")
 
