@@ -1,0 +1,11 @@
+.grid {
+    width: 100%;
+    display: grid;
+    grid-template: repeat(9, 33px) / repeat(9, 33px);
+    justify-content: center;
+}
+
+.sudoku_field {
+    border: 1px solid;
+    text-align: center;
+}
